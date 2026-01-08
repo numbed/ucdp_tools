@@ -4,6 +4,9 @@
 // Configure PDF.js worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
+// BGN/EUR Exchange Rate (Fixed for Eurozone entry)
+const BGN_EUR_RATE = 1.95583;
+
 // State
 let pdfDoc = null;           // PDF.js document for rendering
 let pdfBytes = null;         // ArrayBuffer for PDF-lib manipulation
@@ -46,6 +49,12 @@ const cancelOrderBtn = document.getElementById('cancel-order-btn');
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
+    // Navigation
+    setupNavigation();
+    
+    // Currency calculator
+    setupCurrencyCalculator();
+    
     // File selection
     selectBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -897,5 +906,87 @@ function setupPageDragEvents(pageCard) {
     pageCard.addEventListener('dragend', () => {
         pageCard.classList.remove('dragging');
         draggedPageIndex = null;
+    });
+}
+
+// ==================== NAVIGATION ====================
+
+function setupNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const pdfMain = document.querySelector('main.container');
+    const currencySection = document.getElementById('currency-section');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const tool = link.dataset.tool;
+            
+            // Update active nav
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            // Show/hide sections
+            if (tool === 'pdf') {
+                pdfMain.style.display = 'block';
+                currencySection.style.display = 'none';
+            } else if (tool === 'currency') {
+                pdfMain.style.display = 'none';
+                currencySection.style.display = 'flex';
+            }
+        });
+    });
+}
+
+// ==================== CURRENCY CALCULATOR ====================
+
+function setupCurrencyCalculator() {
+    const bgnInput = document.getElementById('bgn-input');
+    const eurInput = document.getElementById('eur-input');
+    const swapBtn = document.getElementById('swap-currency');
+    
+    // BGN to EUR conversion
+    bgnInput.addEventListener('input', () => {
+        const bgn = parseFloat(bgnInput.value);
+        if (!isNaN(bgn)) {
+            eurInput.value = (bgn / BGN_EUR_RATE).toFixed(2);
+        } else {
+            eurInput.value = '';
+        }
+    });
+    
+    // EUR to BGN conversion
+    eurInput.addEventListener('input', () => {
+        const eur = parseFloat(eurInput.value);
+        if (!isNaN(eur)) {
+            bgnInput.value = (eur * BGN_EUR_RATE).toFixed(2);
+        } else {
+            bgnInput.value = '';
+        }
+    });
+    
+    // Swap values
+    swapBtn.addEventListener('click', () => {
+        const temp = bgnInput.value;
+        bgnInput.value = eurInput.value;
+        eurInput.value = temp;
+        
+        // Recalculate based on BGN
+        const bgn = parseFloat(bgnInput.value);
+        if (!isNaN(bgn)) {
+            eurInput.value = (bgn / BGN_EUR_RATE).toFixed(2);
+        }
+    });
+    
+    // Quick convert buttons
+    document.querySelectorAll('.quick-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (btn.dataset.bgn) {
+                bgnInput.value = btn.dataset.bgn;
+                eurInput.value = (parseFloat(btn.dataset.bgn) / BGN_EUR_RATE).toFixed(2);
+            } else if (btn.dataset.eur) {
+                eurInput.value = btn.dataset.eur;
+                bgnInput.value = (parseFloat(btn.dataset.eur) * BGN_EUR_RATE).toFixed(2);
+            }
+        });
     });
 }

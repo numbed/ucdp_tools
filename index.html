@@ -15,7 +15,8 @@
                 <span>Office Tools</span>
             </div>
             <nav>
-                <a href="#" class="nav-link active"><i class="fas fa-file-pdf"></i> PDF Editor</a>
+                <a href="#" class="nav-link active" data-tool="pdf"><i class="fas fa-file-pdf"></i> PDF Editor</a>
+                <a href="#" class="nav-link" data-tool="currency"><i class="fas fa-euro-sign"></i> BGN/EUR</a>
             </nav>
         </div>
     </header>
@@ -109,6 +110,78 @@
                 <span id="status-message"></span>
             </div>
         </section>
+    </main>
+
+    <!-- Currency Calculator Section -->
+    <main id="currency-section" class="currency-section" style="display: none;">
+        <div class="container">
+            <div class="currency-card">
+                <div class="currency-header">
+                    <h2><i class="fas fa-exchange-alt"></i> BGN ↔ EUR Converter</h2>
+                    <p class="currency-info">Fixed rate for Bulgaria's Eurozone entry: <strong>1 EUR = 1.95583 BGN</strong></p>
+                </div>
+                
+                <div class="currency-converter">
+                    <div class="currency-input-group">
+                        <label for="bgn-input">
+                            <span class="currency-flag">🇧🇬</span> Bulgarian Lev (BGN)
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" id="bgn-input" placeholder="0.00" step="0.01">
+                            <span class="currency-symbol">лв</span>
+                        </div>
+                    </div>
+                    
+                    <button class="swap-btn" id="swap-currency" title="Swap currencies">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                    
+                    <div class="currency-input-group">
+                        <label for="eur-input">
+                            <span class="currency-flag">🇪🇺</span> Euro (EUR)
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" id="eur-input" placeholder="0.00" step="0.01">
+                            <span class="currency-symbol">€</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-convert">
+                    <h4>Quick Convert</h4>
+                    <div class="quick-buttons">
+                        <button class="quick-btn" data-bgn="10">10 лв</button>
+                        <button class="quick-btn" data-bgn="20">20 лв</button>
+                        <button class="quick-btn" data-bgn="50">50 лв</button>
+                        <button class="quick-btn" data-bgn="100">100 лв</button>
+                        <button class="quick-btn" data-eur="10">10 €</button>
+                        <button class="quick-btn" data-eur="20">20 €</button>
+                        <button class="quick-btn" data-eur="50">50 €</button>
+                        <button class="quick-btn" data-eur="100">100 €</button>
+                    </div>
+                </div>
+                
+                <div class="conversion-table">
+                    <h4>Reference Table</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BGN (лв)</th>
+                                <th>EUR (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1.00</td><td>0.51</td></tr>
+                            <tr><td>5.00</td><td>2.56</td></tr>
+                            <tr><td>10.00</td><td>5.11</td></tr>
+                            <tr><td>20.00</td><td>10.23</td></tr>
+                            <tr><td>50.00</td><td>25.56</td></tr>
+                            <tr><td>100.00</td><td>51.13</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>

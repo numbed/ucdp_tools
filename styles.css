@@ -475,6 +475,191 @@ footer {
     color: var(--text-secondary);
 }
 
+/* Currency Calculator */
+.currency-section {
+    padding: 2rem 0;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.currency-card {
+    background: var(--surface);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.currency-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.currency-header h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.currency-header h2 i {
+    color: var(--primary);
+}
+
+.currency-info {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.currency-info strong {
+    color: var(--success);
+}
+
+.currency-converter {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.currency-input-group {
+    width: 100%;
+}
+
+.currency-input-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.currency-flag {
+    font-size: 1.25rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.currency-input-group input {
+    width: 100%;
+    padding: 1rem 3rem 1rem 1rem;
+    font-size: 1.5rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.currency-input-group input:focus {
+    border-color: var(--primary);
+}
+
+.currency-symbol {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.swap-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    color: var(--primary);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.swap-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: rotate(180deg);
+}
+
+.quick-convert {
+    margin-bottom: 2rem;
+}
+
+.quick-convert h4,
+.conversion-table h4 {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.quick-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.quick-btn {
+    padding: 0.625rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.quick-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.conversion-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.conversion-table th,
+.conversion-table td {
+    padding: 0.625rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.conversion-table th {
+    background: var(--bg);
+    font-weight: 600;
+    color: var(--text);
+}
+
+.conversion-table tr:last-child td {
+    border-bottom: none;
+}
+
+.conversion-table td:first-child {
+    color: var(--text-secondary);
+}
+
+.conversion-table td:last-child {
+    font-weight: 600;
+    color: var(--success);
+}
+
 /* Toast Notifications */
 #toast-container {
     position: fixed;
