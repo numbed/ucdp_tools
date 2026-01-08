@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Tools - PDF Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-building"></i>
+                <span>Office Tools</span>
+            </div>
+            <nav>
+                <a href="#" class="nav-link active"><i class="fas fa-file-pdf"></i> PDF Editor</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Upload Section -->
+        <section id="upload-section" class="upload-section">
+            <div class="upload-box" id="upload-box">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h2>Upload PDF File</h2>
+                <p>Drag & drop your PDF here or click to browse</p>
+                <button class="btn btn-primary" id="select-btn">
+                    <i class="fas fa-folder-open"></i> Select File
+                </button>
+                <input type="file" id="pdf-input" accept=".pdf" hidden>
+            </div>
+        </section>
+
+        <!-- Editor Section -->
+        <section id="editor-section" class="editor-section" style="display: none;">
+            <div class="editor-header">
+                <div class="file-info">
+                    <i class="fas fa-file-pdf"></i>
+                    <span id="file-name">document.pdf</span>
+                    <span class="file-size" id="file-size">0 MB</span>
+                </div>
+                <div class="editor-actions">
+                    <button class="btn btn-info" id="merge-btn">
+                        <i class="fas fa-object-group"></i> Merge Files
+                    </button>
+                    <button class="btn btn-success" id="compress-btn">
+                        <i class="fas fa-compress-alt"></i> Compress
+                    </button>
+                    <button class="btn btn-primary" id="download-btn">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                    <button class="btn" id="close-btn">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </div>
+            </div>
+
+            <div class="editor-toolbar">
+                <button class="btn" id="select-all-btn">
+                    <i class="fas fa-check-double"></i> Select All
+                </button>
+                <button class="btn" id="deselect-all-btn">
+                    <i class="fas fa-square"></i> Deselect All
+                </button>
+                <button class="btn btn-danger" id="delete-btn" disabled>
+                    <i class="fas fa-trash"></i> Delete Selected (<span id="selected-count">0</span>)
+                </button>
+                <div class="toolbar-divider"></div>
+                <button class="btn btn-reorder" id="reorder-btn">
+                    <i class="fas fa-arrows-alt"></i> Reorder Mode
+                </button>
+                <button class="btn btn-primary" id="apply-order-btn" style="display: none;">
+                    <i class="fas fa-check"></i> Apply Order
+                </button>
+                <button class="btn" id="cancel-order-btn" style="display: none;">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+
+            <div class="pages-container" id="pages-container">
+                <!-- Page thumbnails will be rendered here -->
+            </div>
+
+            <div class="status-bar">
+                <span id="page-count">0 pages</span>
+                <span id="status-message"></span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Office Tools. Built for productivity.</p>
+        </div>
+    </footer>
+
+    <!-- Merge Modal -->
+    <div id="merge-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-object-group"></i> Merge PDF Files</h3>
+                <button class="btn-close" id="close-merge-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="merge-info">Add PDF files to merge. Drag to reorder. Files will be combined in the order shown.</p>
+                <div class="merge-dropzone" id="merge-dropzone">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Drop PDFs here or click to add</span>
+                    <input type="file" id="merge-input" accept=".pdf" multiple hidden>
+                </div>
+                <div class="merge-file-list" id="merge-file-list"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="clear-merge-list">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+                <button class="btn btn-primary" id="do-merge" disabled>
+                    <i class="fas fa-object-group"></i> Merge PDFs
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
