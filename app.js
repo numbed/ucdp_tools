@@ -82,12 +82,20 @@ function init() {
     });
     
     // Editor buttons
-    compressBtn.addEventListener('click', compressPDF);
+    compressBtn.addEventListener('click', toggleCompressMenu);
+    setupCompressionOptions();
     downloadBtn.addEventListener('click', downloadPDF);
     closeBtn.addEventListener('click', closePDF);
     selectAllBtn.addEventListener('click', selectAllPages);
     deselectAllBtn.addEventListener('click', deselectAllPages);
     deleteBtn.addEventListener('click', deleteSelectedPages);
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            document.getElementById('compress-menu').classList.remove('active');
+        }
+    });
     
     // Merge functionality
     mergeBtn.addEventListener('click', openMergeModal);
@@ -329,8 +337,13 @@ async function deleteSelectedPages() {
 async function compressPDF() {
     if (!pdfBytes) return;
     
+    // Light compression - metadata only
+    await compressLight();
+}
+
+async function compressLight() {
     try {
-        showToast('Compressing PDF...', 'info');
+        showToast('Compressing PDF (light)...', 'info');
         
         const originalSize = pdfBytes.byteLength;
         
@@ -371,6 +384,127 @@ async function compressPDF() {
         console.error('Error compressing PDF:', error);
         showToast('Error compressing PDF: ' + error.message, 'error');
     }
+}
+
+async function compressWithQuality(dpi, quality) {
+    if (!pdfDoc || !pdfBytes) return;
+    
+    try {
+        const originalSize = pdfBytes.byteLength;
+        const totalPages = pdfDoc.numPages;
+        
+        showToast(`Compressing ${totalPages} pages at ${dpi} DPI...`, 'info');
+        
+        const { PDFDocument } = PDFLib;
+        const newPdfDoc = await PDFDocument.create();
+        
+        for (let i = 1; i <= totalPages; i++) {
+            // Update progress
+            document.getElementById('status-message').textContent = `Compressing page ${i}/${totalPages}...`;
+            
+            // Get page from PDF.js
+            const page = await pdfDoc.getPage(i);
+            const viewport = page.getViewport({ scale: 1 });
+            
+            // Calculate scale based on desired DPI (72 is PDF default)
+            const scale = dpi / 72;
+            const scaledViewport = page.getViewport({ scale });
+            
+            // Create canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = scaledViewport.width;
+            canvas.height = scaledViewport.height;
+            const ctx = canvas.getContext('2d');
+            
+            // Render page to canvas
+            await page.render({
+                canvasContext: ctx,
+                viewport: scaledViewport
+            }).promise;
+            
+            // Convert to JPEG with quality setting
+            const jpegDataUrl = canvas.toDataURL('image/jpeg', quality);
+            const jpegBytes = await fetch(jpegDataUrl).then(res => res.arrayBuffer());
+            
+            // Embed image in new PDF
+            const jpegImage = await newPdfDoc.embedJpg(jpegBytes);
+            
+            // Add page with original dimensions
+            const newPage = newPdfDoc.addPage([viewport.width, viewport.height]);
+            newPage.drawImage(jpegImage, {
+                x: 0,
+                y: 0,
+                width: viewport.width,
+                height: viewport.height
+            });
+            
+            // Allow UI to update
+            await new Promise(r => setTimeout(r, 10));
+        }
+        
+        // Save compressed PDF
+        const compressedBytes = await newPdfDoc.save();
+        const newSize = compressedBytes.byteLength;
+        const reduction = ((1 - newSize / originalSize) * 100).toFixed(1);
+        
+        pdfBytes = compressedBytes.buffer;
+        
+        // Reload with PDF.js
+        const loadingTask = pdfjsLib.getDocument({ data: pdfBytes.slice(0) });
+        pdfDoc = await loadingTask.promise;
+        
+        updateFileSize(pdfBytes.byteLength);
+        document.getElementById('status-message').textContent = '';
+        
+        // Re-render thumbnails
+        initPageOrder();
+        await renderAllPages();
+        
+        showToast(`Compressed! Size reduced by ${reduction}% (${formatSize(originalSize)} → ${formatSize(newSize)})`, 'success');
+    } catch (error) {
+        console.error('Error compressing PDF:', error);
+        document.getElementById('status-message').textContent = '';
+        showToast('Error compressing PDF: ' + error.message, 'error');
+    }
+}
+
+function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1024 / 1024).toFixed(2) + ' MB';
+}
+
+function toggleCompressMenu(e) {
+    e.stopPropagation();
+    document.getElementById('compress-menu').classList.toggle('active');
+}
+
+function setupCompressionOptions() {
+    const menu = document.getElementById('compress-menu');
+    
+    menu.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            menu.classList.remove('active');
+            
+            const quality = item.dataset.quality;
+            
+            switch (quality) {
+                case 'light':
+                    await compressLight();
+                    break;
+                case 'medium':
+                    await compressWithQuality(150, 0.8);
+                    break;
+                case 'high':
+                    await compressWithQuality(100, 0.6);
+                    break;
+                case 'maximum':
+                    await compressWithQuality(72, 0.4);
+                    break;
+            }
+        });
+    });
 }
 
 async function downloadPDF() {

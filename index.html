@@ -46,9 +46,29 @@
                     <button class="btn btn-info" id="merge-btn">
                         <i class="fas fa-object-group"></i> Merge Files
                     </button>
-                    <button class="btn btn-success" id="compress-btn">
-                        <i class="fas fa-compress-alt"></i> Compress
-                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-success" id="compress-btn">
+                            <i class="fas fa-compress-alt"></i> Compress <i class="fas fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-menu" id="compress-menu">
+                            <button class="dropdown-item" data-quality="light">
+                                <i class="fas fa-feather"></i> Light
+                                <span>Remove metadata only</span>
+                            </button>
+                            <button class="dropdown-item" data-quality="medium">
+                                <i class="fas fa-balance-scale"></i> Medium
+                                <span>150 DPI, 80% quality</span>
+                            </button>
+                            <button class="dropdown-item" data-quality="high">
+                                <i class="fas fa-compress-arrows-alt"></i> High
+                                <span>100 DPI, 60% quality</span>
+                            </button>
+                            <button class="dropdown-item" data-quality="maximum">
+                                <i class="fas fa-file-archive"></i> Maximum
+                                <span>72 DPI, 40% quality</span>
+                            </button>
+                        </div>
+                    </div>
                     <button class="btn btn-primary" id="download-btn">
                         <i class="fas fa-download"></i> Download
                     </button>
