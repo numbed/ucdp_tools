@@ -339,8 +339,18 @@
     <!-- Toast Container -->
     <div id="toast-container"></div>
 
+    <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-    <script src="app.js"></script>
+    
+    <!-- Application Modules (order matters - main.js must be first) -->
+    <script src="js/main.js"></script>
+    <script src="js/pdf-editor.js"></script>
+    <script src="js/pdf-compress.js"></script>
+    <script src="js/pdf-reorder.js"></script>
+    <script src="js/pdf-merge.js"></script>
+    <script src="js/batch-compress.js"></script>
+    <script src="js/batch-append.js"></script>
+    <script src="js/currency.js"></script>
 </body>
 </html>
