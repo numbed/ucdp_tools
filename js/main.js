@@ -1,7 +1,5 @@
 // ==================== MAIN.JS - Shared State, Utilities & Initialization ====================
 
-console.log('main.js loaded');
-
 // PDF.js configuration
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -53,6 +51,9 @@ function init() {
     
     // Setup navigation
     setupNavigation();
+    
+    // Apply translations
+    updateAllTranslations();
     
     // File upload events
     uploadBox.addEventListener('click', () => pdfInput.click());
@@ -200,7 +201,4 @@ function showToast(message, type = 'info') {
 }
 
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded fired, calling init()');
-    init();
-});
+document.addEventListener('DOMContentLoaded', init);

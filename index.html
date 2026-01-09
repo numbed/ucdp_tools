@@ -12,13 +12,14 @@
         <div class="container">
             <div class="logo">
                 <img src="logo.png" alt="Office Tools">
-                <span>Office Tools</span>
+                <span data-i18n="officeTools">Office Tools</span>
             </div>
             <nav>
-                <a href="#" class="nav-link active" data-tool="pdf"><i class="fas fa-file-pdf"></i> PDF Editor</a>
-                <a href="#" class="nav-link" data-tool="batch"><i class="fas fa-layer-group"></i> Batch Compress</a>
-                <a href="#" class="nav-link" data-tool="append"><i class="fas fa-plus-circle"></i> Batch Append</a>
-                <a href="#" class="nav-link" data-tool="currency"><i class="fas fa-euro-sign"></i> BGN/EUR</a>
+                <a href="#" class="nav-link active" data-tool="pdf"><i class="fas fa-file-pdf"></i> <span data-i18n="pdfEditor">PDF Editor</span></a>
+                <a href="#" class="nav-link" data-tool="batch"><i class="fas fa-layer-group"></i> <span data-i18n="batchCompress">Batch Compress</span></a>
+                <a href="#" class="nav-link" data-tool="append"><i class="fas fa-plus-circle"></i> <span data-i18n="batchAppend">Batch Append</span></a>
+                <a href="#" class="nav-link" data-tool="currency"><i class="fas fa-euro-sign"></i> <span data-i18n="bgnEur">BGN/EUR</span></a>
+                <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">BG</button>
             </nav>
         </div>
     </header>
@@ -28,10 +29,10 @@
         <section id="upload-section" class="upload-section">
             <div class="upload-box" id="upload-box">
                 <i class="fas fa-cloud-upload-alt"></i>
-                <h2>Upload PDF File</h2>
-                <p>Drag & drop your PDF here or click to browse</p>
+                <h2 data-i18n="uploadPdfFile">Upload PDF File</h2>
+                <p data-i18n="dragDropPdf">Drag & drop your PDF here or click to browse</p>
                 <button class="btn btn-primary" id="select-btn">
-                    <i class="fas fa-folder-open"></i> Select File
+                    <i class="fas fa-folder-open"></i> <span data-i18n="selectFile">Select File</span>
                 </button>
                 <input type="file" id="pdf-input" accept=".pdf" hidden>
             </div>
@@ -47,59 +48,59 @@
                 </div>
                 <div class="editor-actions">
                     <button class="btn btn-info" id="merge-btn">
-                        <i class="fas fa-object-group"></i> Merge Files
+                        <i class="fas fa-object-group"></i> <span data-i18n="mergeFiles">Merge Files</span>
                     </button>
                     <div class="dropdown">
                         <button class="btn btn-success" id="compress-btn">
-                            <i class="fas fa-compress-alt"></i> Compress <i class="fas fa-caret-down"></i>
+                            <i class="fas fa-compress-alt"></i> <span data-i18n="compress">Compress</span> <i class="fas fa-caret-down"></i>
                         </button>
                         <div class="dropdown-menu" id="compress-menu">
                             <button class="dropdown-item" data-quality="light">
-                                <i class="fas fa-feather"></i> Light
-                                <span>Remove metadata only</span>
+                                <i class="fas fa-feather"></i> <span data-i18n="light">Light</span>
+                                <span data-i18n="lightDesc">Metadata only</span>
                             </button>
                             <button class="dropdown-item" data-quality="medium">
-                                <i class="fas fa-balance-scale"></i> Medium
-                                <span>150 DPI, 80% quality</span>
+                                <i class="fas fa-balance-scale"></i> <span data-i18n="medium">Medium</span>
+                                <span data-i18n="mediumDesc">150 DPI</span>
                             </button>
                             <button class="dropdown-item" data-quality="high">
-                                <i class="fas fa-compress-arrows-alt"></i> High
-                                <span>100 DPI, 60% quality</span>
+                                <i class="fas fa-compress-arrows-alt"></i> <span data-i18n="high">High</span>
+                                <span data-i18n="highDesc">100 DPI</span>
                             </button>
                             <button class="dropdown-item" data-quality="maximum">
-                                <i class="fas fa-file-archive"></i> Maximum
-                                <span>72 DPI, 40% quality</span>
+                                <i class="fas fa-file-archive"></i> <span data-i18n="maximum">Maximum</span>
+                                <span data-i18n="maximumDesc">72 DPI</span>
                             </button>
                         </div>
                     </div>
                     <button class="btn btn-primary" id="download-btn">
-                        <i class="fas fa-download"></i> Download
+                        <i class="fas fa-download"></i> <span data-i18n="download">Download</span>
                     </button>
                     <button class="btn" id="close-btn">
-                        <i class="fas fa-times"></i> Close
+                        <i class="fas fa-times"></i> <span data-i18n="close">Close</span>
                     </button>
                 </div>
             </div>
 
             <div class="editor-toolbar">
                 <button class="btn" id="select-all-btn">
-                    <i class="fas fa-check-double"></i> Select All
+                    <i class="fas fa-check-double"></i> <span data-i18n="selectAll">Select All</span>
                 </button>
                 <button class="btn" id="deselect-all-btn">
-                    <i class="fas fa-square"></i> Deselect All
+                    <i class="fas fa-square"></i> <span data-i18n="deselectAll">Deselect All</span>
                 </button>
                 <button class="btn btn-danger" id="delete-btn" disabled>
-                    <i class="fas fa-trash"></i> Delete Selected (<span id="selected-count">0</span>)
+                    <i class="fas fa-trash"></i> <span data-i18n="deleteSelected">Delete Selected</span> (<span id="selected-count">0</span>)
                 </button>
                 <div class="toolbar-divider"></div>
                 <button class="btn btn-reorder" id="reorder-btn">
-                    <i class="fas fa-arrows-alt"></i> Reorder Mode
+                    <i class="fas fa-arrows-alt"></i> <span data-i18n="reorderMode">Reorder Mode</span>
                 </button>
                 <button class="btn btn-primary" id="apply-order-btn" style="display: none;">
-                    <i class="fas fa-check"></i> Apply Order
+                    <i class="fas fa-check"></i> <span data-i18n="applyOrder">Apply Order</span>
                 </button>
                 <button class="btn" id="cancel-order-btn" style="display: none;">
-                    <i class="fas fa-times"></i> Cancel
+                    <i class="fas fa-times"></i> <span data-i18n="cancel">Cancel</span>
                 </button>
             </div>
 
@@ -119,35 +120,35 @@
         <div class="container">
             <div class="batch-card">
                 <div class="batch-header">
-                    <h2><i class="fas fa-compress-arrows-alt"></i> Batch PDF Compression</h2>
-                    <p>Compress multiple PDF files at once</p>
+                    <h2><i class="fas fa-compress-arrows-alt"></i> <span data-i18n="batchPdfCompression">Batch PDF Compression</span></h2>
+                    <p data-i18n="compressMultiple">Compress multiple PDF files at once</p>
                 </div>
 
                 <div class="batch-upload" id="batch-upload">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <h3>Drop PDF files here</h3>
-                    <p>or click to select multiple files</p>
+                    <h3 data-i18n="dropPdfFilesHere">Drop PDF files here</h3>
+                    <p data-i18n="clickToSelectMultiple">or click to select multiple files</p>
                 </div>
                 <input type="file" id="batch-input" accept=".pdf" multiple hidden>
 
                 <div class="batch-options">
-                    <label>Compression Level:</label>
+                    <label data-i18n="compressionLevel">Compression Level:</label>
                     <div class="compression-options">
                         <label class="radio-option">
                             <input type="radio" name="batch-quality" value="light" checked>
-                            <span><i class="fas fa-feather"></i> Light</span>
+                            <span><i class="fas fa-feather"></i> <span data-i18n="light">Light</span></span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="batch-quality" value="medium">
-                            <span><i class="fas fa-balance-scale"></i> Medium (150 DPI)</span>
+                            <span><i class="fas fa-balance-scale"></i> <span data-i18n="medium">Medium</span> (150 DPI)</span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="batch-quality" value="high">
-                            <span><i class="fas fa-compress-arrows-alt"></i> High (100 DPI)</span>
+                            <span><i class="fas fa-compress-arrows-alt"></i> <span data-i18n="high">High</span> (100 DPI)</span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="batch-quality" value="maximum">
-                            <span><i class="fas fa-file-archive"></i> Maximum (72 DPI)</span>
+                            <span><i class="fas fa-file-archive"></i> <span data-i18n="maximum">Maximum</span> (72 DPI)</span>
                         </label>
                     </div>
                 </div>
@@ -156,13 +157,13 @@
 
                 <div class="batch-actions" id="batch-actions" style="display: none;">
                     <button class="btn" id="clear-batch">
-                        <i class="fas fa-trash"></i> Clear All
+                        <i class="fas fa-trash"></i> <span data-i18n="clearAll">Clear All</span>
                     </button>
                     <button class="btn btn-success" id="start-batch">
-                        <i class="fas fa-play"></i> Compress All
+                        <i class="fas fa-play"></i> <span data-i18n="compressAll">Compress All</span>
                     </button>
                     <button class="btn btn-primary" id="download-all-batch" style="display: none;">
-                        <i class="fas fa-download"></i> Download All
+                        <i class="fas fa-download"></i> <span data-i18n="downloadAll">Download All</span>
                     </button>
                 </div>
 
@@ -181,17 +182,17 @@
         <div class="container">
             <div class="batch-card">
                 <div class="batch-header">
-                    <h2><i class="fas fa-plus-circle"></i> Batch Append PDF</h2>
-                    <p>Append one PDF to the end of multiple files</p>
+                    <h2><i class="fas fa-plus-circle"></i> <span data-i18n="batchAppendPdf">Batch Append PDF</span></h2>
+                    <p data-i18n="appendOneToMultiple">Append one PDF to the end of multiple files</p>
                 </div>
 
                 <div class="append-grid">
                     <div class="append-column">
-                        <h4><i class="fas fa-file-pdf"></i> File to Append</h4>
-                        <p class="append-help">This file will be added to the end of all target files</p>
+                        <h4><i class="fas fa-file-pdf"></i> <span data-i18n="fileToAppend">File to Append</span></h4>
+                        <p class="append-help" data-i18n="fileToAppendHelp">This file will be added to the end of all target files</p>
                         <div class="append-upload" id="append-source-upload">
                             <i class="fas fa-file-import"></i>
-                            <span id="append-source-name">Click or drop to select</span>
+                            <span id="append-source-name" data-i18n="clickOrDropToSelect">Click or drop to select</span>
                         </div>
                         <input type="file" id="append-source-input" accept=".pdf" hidden>
                     </div>
@@ -201,11 +202,11 @@
                     </div>
                     
                     <div class="append-column">
-                        <h4><i class="fas fa-copy"></i> Target Files</h4>
-                        <p class="append-help">Files that will have the source appended</p>
+                        <h4><i class="fas fa-copy"></i> <span data-i18n="targetFiles">Target Files</span></h4>
+                        <p class="append-help" data-i18n="targetFilesHelp">Files that will have the source appended</p>
                         <div class="append-upload" id="append-target-upload">
                             <i class="fas fa-folder-open"></i>
-                            <span>Click or drop multiple PDFs</span>
+                            <span data-i18n="clickOrDropMultiple">Click or drop multiple PDFs</span>
                         </div>
                         <input type="file" id="append-target-input" accept=".pdf" multiple hidden>
                     </div>
@@ -215,13 +216,13 @@
 
                 <div class="batch-actions" id="append-actions" style="display: none;">
                     <button class="btn" id="clear-append">
-                        <i class="fas fa-trash"></i> Clear All
+                        <i class="fas fa-trash"></i> <span data-i18n="clearAll">Clear All</span>
                     </button>
                     <button class="btn btn-primary" id="start-append">
-                        <i class="fas fa-play"></i> Append to All
+                        <i class="fas fa-play"></i> <span data-i18n="appendToAll">Append to All</span>
                     </button>
                     <button class="btn btn-success" id="download-all-append" style="display: none;">
-                        <i class="fas fa-download"></i> Download All
+                        <i class="fas fa-download"></i> <span data-i18n="downloadAll">Download All</span>
                     </button>
                 </div>
 
@@ -240,14 +241,14 @@
         <div class="container">
             <div class="currency-card">
                 <div class="currency-header">
-                    <h2><i class="fas fa-exchange-alt"></i> BGN ↔ EUR Converter</h2>
-                    <p class="currency-info">Fixed rate for Bulgaria's Eurozone entry: <strong>1 EUR = 1.95583 BGN</strong></p>
+                    <h2><i class="fas fa-exchange-alt"></i> <span data-i18n="bgnEurConverter">BGN ↔ EUR Converter</span></h2>
+                    <p class="currency-info"><span data-i18n="fixedRate">Fixed rate for Bulgaria's Eurozone entry:</span> <strong>1 EUR = 1.95583 BGN</strong></p>
                 </div>
                 
                 <div class="currency-converter">
                     <div class="currency-input-group">
                         <label for="bgn-input">
-                            <span class="currency-flag">🇧🇬</span> Bulgarian Lev (BGN)
+                            <span class="currency-flag">🇧🇬</span> <span data-i18n="bulgarianLev">Bulgarian Lev (BGN)</span>
                         </label>
                         <div class="input-wrapper">
                             <input type="number" id="bgn-input" placeholder="0.00" step="0.01">
@@ -261,7 +262,7 @@
                     
                     <div class="currency-input-group">
                         <label for="eur-input">
-                            <span class="currency-flag">🇪🇺</span> Euro (EUR)
+                            <span class="currency-flag">🇪🇺</span> <span data-i18n="euro">Euro (EUR)</span>
                         </label>
                         <div class="input-wrapper">
                             <input type="number" id="eur-input" placeholder="0.00" step="0.01">
@@ -271,7 +272,7 @@
                 </div>
                 
                 <div class="quick-convert">
-                    <h4>Quick Convert</h4>
+                    <h4 data-i18n="quickConvert">Quick Convert</h4>
                     <div class="quick-buttons">
                         <button class="quick-btn" data-bgn="10">10 лв</button>
                         <button class="quick-btn" data-bgn="20">20 лв</button>
@@ -285,7 +286,7 @@
                 </div>
                 
                 <div class="conversion-table">
-                    <h4>Reference Table</h4>
+                    <h4 data-i18n="referenceTable">Reference Table</h4>
                     <table>
                         <thead>
                             <tr>
@@ -317,26 +318,26 @@
     <div id="merge-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fas fa-object-group"></i> Merge PDF Files</h3>
+                <h3><i class="fas fa-object-group"></i> <span data-i18n="mergePdfFiles">Merge PDF Files</span></h3>
                 <button class="btn-close" id="close-merge-modal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="merge-info">Add PDF files to merge. Drag to reorder. Files will be combined in the order shown.</p>
+                <p class="merge-info" data-i18n="mergeInfo">Add PDF files to merge. Drag to reorder. Files will be combined in the order shown.</p>
                 <div class="merge-dropzone" id="merge-dropzone">
                     <i class="fas fa-plus-circle"></i>
-                    <span>Drop PDFs here or click to add</span>
+                    <span data-i18n="dropPdfsHere">Drop PDFs here or click to add</span>
                     <input type="file" id="merge-input" accept=".pdf" multiple hidden>
                 </div>
                 <div class="merge-file-list" id="merge-file-list"></div>
             </div>
             <div class="modal-footer">
                 <button class="btn" id="clear-merge-list">
-                    <i class="fas fa-trash"></i> Clear All
+                    <i class="fas fa-trash"></i> <span data-i18n="clearAll">Clear All</span>
                 </button>
                 <button class="btn btn-primary" id="do-merge" disabled>
-                    <i class="fas fa-object-group"></i> Merge PDFs
+                    <i class="fas fa-object-group"></i> <span data-i18n="mergePdfs">Merge PDFs</span>
                 </button>
             </div>
         </div>
@@ -349,7 +350,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     
-    <!-- Application Modules (order matters - main.js must be first) -->
+    <!-- Application Modules (order matters - translations and main.js must be first) -->
+    <script src="js/translations.js"></script>
     <script src="js/main.js"></script>
     <script src="js/pdf-editor.js"></script>
     <script src="js/pdf-compress.js"></script>

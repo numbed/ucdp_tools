@@ -3,26 +3,17 @@
 let batchFiles = [];
 
 function setupBatchCompression() {
-    console.log('Setting up batch compression...');
-    
     const batchUpload = document.getElementById('batch-upload');
     const batchInput = document.getElementById('batch-input');
     const clearBatchBtn = document.getElementById('clear-batch');
     const startBatchBtn = document.getElementById('start-batch');
     
-    console.log('batch-upload:', batchUpload);
-    console.log('batch-input:', batchInput);
-    
     if (!batchUpload || !batchInput) {
-        console.error('Batch compress elements not found!');
         return;
     }
     
     // Click to upload
-    batchUpload.addEventListener('click', () => {
-        console.log('Batch upload clicked');
-        batchInput.click();
-    });
+    batchUpload.addEventListener('click', () => batchInput.click());
     batchInput.addEventListener('change', handleBatchFileSelect);
     
     // Drag and drop

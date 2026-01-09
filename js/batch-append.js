@@ -4,8 +4,6 @@ let appendSourceFile = null;
 let appendTargetFiles = [];
 
 function setupBatchAppend() {
-    console.log('Setting up batch append...');
-    
     const sourceUpload = document.getElementById('append-source-upload');
     const sourceInput = document.getElementById('append-source-input');
     const targetUpload = document.getElementById('append-target-upload');
@@ -13,21 +11,12 @@ function setupBatchAppend() {
     const clearBtn = document.getElementById('clear-append');
     const startBtn = document.getElementById('start-append');
     
-    console.log('append-source-upload:', sourceUpload);
-    console.log('append-source-input:', sourceInput);
-    console.log('append-target-upload:', targetUpload);
-    console.log('append-target-input:', targetInput);
-    
     if (!sourceUpload || !sourceInput || !targetUpload || !targetInput) {
-        console.error('Batch append elements not found!');
         return;
     }
     
     // Source file upload
-    sourceUpload.addEventListener('click', () => {
-        console.log('Source upload clicked');
-        sourceInput.click();
-    });
+    sourceUpload.addEventListener('click', () => sourceInput.click());
     sourceInput.addEventListener('change', handleAppendSourceSelect);
     
     sourceUpload.addEventListener('dragover', (e) => {
