@@ -127,8 +127,8 @@
                     <i class="fas fa-cloud-upload-alt"></i>
                     <h3>Drop PDF files here</h3>
                     <p>or click to select multiple files</p>
-                    <input type="file" id="batch-input" accept=".pdf" multiple hidden>
                 </div>
+                <input type="file" id="batch-input" accept=".pdf" multiple hidden>
 
                 <div class="batch-options">
                     <label>Compression Level:</label>
@@ -161,6 +161,9 @@
                     <button class="btn btn-success" id="start-batch">
                         <i class="fas fa-play"></i> Compress All
                     </button>
+                    <button class="btn btn-primary" id="download-all-batch" style="display: none;">
+                        <i class="fas fa-download"></i> Download All
+                    </button>
                 </div>
 
                 <div class="batch-progress" id="batch-progress" style="display: none;">
@@ -189,8 +192,8 @@
                         <div class="append-upload" id="append-source-upload">
                             <i class="fas fa-file-import"></i>
                             <span id="append-source-name">Click or drop to select</span>
-                            <input type="file" id="append-source-input" accept=".pdf" hidden>
                         </div>
+                        <input type="file" id="append-source-input" accept=".pdf" hidden>
                     </div>
                     
                     <div class="append-arrow">
@@ -203,8 +206,8 @@
                         <div class="append-upload" id="append-target-upload">
                             <i class="fas fa-folder-open"></i>
                             <span>Click or drop multiple PDFs</span>
-                            <input type="file" id="append-target-input" accept=".pdf" multiple hidden>
                         </div>
+                        <input type="file" id="append-target-input" accept=".pdf" multiple hidden>
                     </div>
                 </div>
 
@@ -216,6 +219,9 @@
                     </button>
                     <button class="btn btn-primary" id="start-append">
                         <i class="fas fa-play"></i> Append to All
+                    </button>
+                    <button class="btn btn-success" id="download-all-append" style="display: none;">
+                        <i class="fas fa-download"></i> Download All
                     </button>
                 </div>
 

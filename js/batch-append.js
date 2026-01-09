@@ -4,6 +4,8 @@ let appendSourceFile = null;
 let appendTargetFiles = [];
 
 function setupBatchAppend() {
+    console.log('Setting up batch append...');
+    
     const sourceUpload = document.getElementById('append-source-upload');
     const sourceInput = document.getElementById('append-source-input');
     const targetUpload = document.getElementById('append-target-upload');
@@ -11,8 +13,21 @@ function setupBatchAppend() {
     const clearBtn = document.getElementById('clear-append');
     const startBtn = document.getElementById('start-append');
     
+    console.log('append-source-upload:', sourceUpload);
+    console.log('append-source-input:', sourceInput);
+    console.log('append-target-upload:', targetUpload);
+    console.log('append-target-input:', targetInput);
+    
+    if (!sourceUpload || !sourceInput || !targetUpload || !targetInput) {
+        console.error('Batch append elements not found!');
+        return;
+    }
+    
     // Source file upload
-    sourceUpload.addEventListener('click', () => sourceInput.click());
+    sourceUpload.addEventListener('click', () => {
+        console.log('Source upload clicked');
+        sourceInput.click();
+    });
     sourceInput.addEventListener('change', handleAppendSourceSelect);
     
     sourceUpload.addEventListener('dragover', (e) => {
@@ -54,6 +69,7 @@ function setupBatchAppend() {
     // Action buttons
     clearBtn.addEventListener('click', clearAppendFiles);
     startBtn.addEventListener('click', startBatchAppend);
+    document.getElementById('download-all-append').addEventListener('click', downloadAllAppendFiles);
 }
 
 async function handleAppendSourceSelect(e) {
@@ -79,7 +95,8 @@ async function setAppendSourceFile(file) {
 }
 
 function handleAppendTargetSelect(e) {
-    addAppendTargetFiles(e.target.files);
+    const files = Array.from(e.target.files);
+    addAppendTargetFiles(files);
     e.target.value = '';
 }
 
@@ -234,7 +251,14 @@ async function startBatchAppend() {
     }
     
     document.getElementById('start-append').disabled = false;
+    updateAppendDownloadAllButton();
     showToast(`Appended to ${completed} files!`, 'success');
+}
+
+function updateAppendDownloadAllButton() {
+    const downloadAllBtn = document.getElementById('download-all-append');
+    const hasCompletedFiles = appendTargetFiles.some(f => f.status === 'done');
+    downloadAllBtn.style.display = hasCompletedFiles ? 'inline-flex' : 'none';
 }
 
 function downloadAppendFile(index) {
@@ -248,4 +272,27 @@ function downloadAppendFile(index) {
     a.download = file.name.replace('.pdf', '_merged.pdf');
     a.click();
     URL.revokeObjectURL(url);
+}
+
+function downloadAllAppendFiles() {
+    const completedFiles = appendTargetFiles.filter(f => f.status === 'done' && f.resultData);
+    if (completedFiles.length === 0) {
+        showToast('No files to download', 'error');
+        return;
+    }
+    
+    // Download each file with a small delay to avoid browser blocking
+    completedFiles.forEach((file, index) => {
+        setTimeout(() => {
+            const blob = new Blob([file.resultData], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = file.name.replace('.pdf', '_merged.pdf');
+            a.click();
+            URL.revokeObjectURL(url);
+        }, index * 300);
+    });
+    
+    showToast(`Downloading ${completedFiles.length} files...`, 'success');
 }

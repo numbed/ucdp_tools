@@ -1,5 +1,7 @@
 // ==================== MAIN.JS - Shared State, Utilities & Initialization ====================
 
+console.log('main.js loaded');
+
 // PDF.js configuration
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -31,17 +33,17 @@ function init() {
     editorSection = document.getElementById('editor-section');
     pagesContainer = document.getElementById('pages-container');
     
-    selectAllBtn = document.getElementById('select-all');
-    deselectAllBtn = document.getElementById('deselect-all');
-    deleteBtn = document.getElementById('delete-selected');
+    selectAllBtn = document.getElementById('select-all-btn');
+    deselectAllBtn = document.getElementById('deselect-all-btn');
+    deleteBtn = document.getElementById('delete-btn');
     compressBtn = document.getElementById('compress-btn');
     mergeBtn = document.getElementById('merge-btn');
     downloadBtn = document.getElementById('download-btn');
     closeBtn = document.getElementById('close-btn');
     
     reorderBtn = document.getElementById('reorder-btn');
-    applyOrderBtn = document.getElementById('apply-order');
-    cancelOrderBtn = document.getElementById('cancel-order');
+    applyOrderBtn = document.getElementById('apply-order-btn');
+    cancelOrderBtn = document.getElementById('cancel-order-btn');
     
     mergeModal = document.getElementById('merge-modal');
     mergeInput = document.getElementById('merge-input');
@@ -91,7 +93,7 @@ function init() {
     
     // Merge functionality
     mergeBtn.addEventListener('click', openMergeModal);
-    document.getElementById('close-merge').addEventListener('click', closeMergeModal);
+    document.getElementById('close-merge-modal').addEventListener('click', closeMergeModal);
     mergeUploadBox.addEventListener('click', () => mergeInput.click());
     mergeInput.addEventListener('change', handleMergeFileSelect);
     document.getElementById('clear-merge-list').addEventListener('click', clearMergeList);
@@ -198,4 +200,7 @@ function showToast(message, type = 'info') {
 }
 
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded fired, calling init()');
+    init();
+});

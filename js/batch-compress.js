@@ -3,13 +3,26 @@
 let batchFiles = [];
 
 function setupBatchCompression() {
+    console.log('Setting up batch compression...');
+    
     const batchUpload = document.getElementById('batch-upload');
     const batchInput = document.getElementById('batch-input');
     const clearBatchBtn = document.getElementById('clear-batch');
     const startBatchBtn = document.getElementById('start-batch');
     
+    console.log('batch-upload:', batchUpload);
+    console.log('batch-input:', batchInput);
+    
+    if (!batchUpload || !batchInput) {
+        console.error('Batch compress elements not found!');
+        return;
+    }
+    
     // Click to upload
-    batchUpload.addEventListener('click', () => batchInput.click());
+    batchUpload.addEventListener('click', () => {
+        console.log('Batch upload clicked');
+        batchInput.click();
+    });
     batchInput.addEventListener('change', handleBatchFileSelect);
     
     // Drag and drop
@@ -31,10 +44,12 @@ function setupBatchCompression() {
     // Action buttons
     clearBatchBtn.addEventListener('click', clearBatchFiles);
     startBatchBtn.addEventListener('click', startBatchCompression);
+    document.getElementById('download-all-batch').addEventListener('click', downloadAllBatchFiles);
 }
 
 function handleBatchFileSelect(e) {
-    addBatchFiles(e.target.files);
+    const files = Array.from(e.target.files);
+    addBatchFiles(files);
     e.target.value = '';
 }
 
@@ -194,7 +209,37 @@ async function startBatchCompression() {
     }
     
     document.getElementById('start-batch').disabled = false;
+    updateDownloadAllButton();
     showToast(`Compressed ${completed} files!`, 'success');
+}
+
+function updateDownloadAllButton() {
+    const downloadAllBtn = document.getElementById('download-all-batch');
+    const hasCompletedFiles = batchFiles.some(f => f.status === 'done');
+    downloadAllBtn.style.display = hasCompletedFiles ? 'inline-flex' : 'none';
+}
+
+function downloadAllBatchFiles() {
+    const completedFiles = batchFiles.filter(f => f.status === 'done' && f.compressedData);
+    if (completedFiles.length === 0) {
+        showToast('No files to download', 'error');
+        return;
+    }
+    
+    // Download each file with a small delay to avoid browser blocking
+    completedFiles.forEach((file, index) => {
+        setTimeout(() => {
+            const blob = new Blob([file.compressedData], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = file.name.replace('.pdf', '_compressed.pdf');
+            a.click();
+            URL.revokeObjectURL(url);
+        }, index * 300);
+    });
+    
+    showToast(`Downloading ${completedFiles.length} files...`, 'success');
 }
 
 async function compressPDFBuffer(buffer, quality) {
