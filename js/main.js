@@ -143,6 +143,11 @@ function setupNavigation() {
     
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
+            // Skip external links (let them navigate normally)
+            if (link.getAttribute('target') === '_blank' || link.href.startsWith('http')) {
+                return;
+            }
+            
             e.preventDefault();
             const tool = link.dataset.tool;
             
