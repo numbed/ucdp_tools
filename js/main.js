@@ -130,15 +130,15 @@ function init() {
     setupBatchCompression();
     setupBatchAppend();
     setupCurrencyCalculator();
+    setupPdfExtract();
+    setupPdfSplit();
 }
 
 // ==================== NAVIGATION ====================
 
 function setupNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
-    const pdfMain = document.querySelector('main.container');
-    const batchSection = document.getElementById('batch-section');
-    const appendSection = document.getElementById('append-section');
+    const pdfToolsSection = document.getElementById('pdf-tools-section');
     const currencySection = document.getElementById('currency-section');
     
     navLinks.forEach(link => {
@@ -151,20 +151,41 @@ function setupNavigation() {
             link.classList.add('active');
             
             // Hide all sections
-            pdfMain.style.display = 'none';
-            batchSection.style.display = 'none';
-            appendSection.style.display = 'none';
+            pdfToolsSection.style.display = 'none';
             currencySection.style.display = 'none';
             
             // Show selected section
-            if (tool === 'pdf') {
-                pdfMain.style.display = 'block';
-            } else if (tool === 'batch') {
-                batchSection.style.display = 'block';
-            } else if (tool === 'append') {
-                appendSection.style.display = 'block';
+            if (tool === 'pdf-tools') {
+                pdfToolsSection.style.display = 'block';
             } else if (tool === 'currency') {
                 currencySection.style.display = 'flex';
+            }
+        });
+    });
+    
+    // Setup PDF subtabs
+    setupPdfSubtabs();
+}
+
+function setupPdfSubtabs() {
+    const subtabs = document.querySelectorAll('.pdf-subtabs .subtab');
+    const subtoolContents = document.querySelectorAll('.pdf-subtool-content');
+    
+    subtabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const subtool = tab.dataset.subtool;
+            
+            // Update active subtab
+            subtabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            // Hide all subtool contents
+            subtoolContents.forEach(content => content.classList.remove('active'));
+            
+            // Show selected subtool
+            const targetContent = document.getElementById(`pdf-${subtool}-subtool`);
+            if (targetContent) {
+                targetContent.classList.add('active');
             }
         });
     });

@@ -1273,6 +1273,270 @@ footer {
     color: white;
 }
 
+/* PDF Tools Section with Subtabs */
+.pdf-tools-section {
+    flex: 1;
+    display: block;
+}
+
+.pdf-subtabs {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--surface);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.subtab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.subtab:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.subtab.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.subtab i {
+    font-size: 1rem;
+}
+
+.pdf-subtool-content {
+    display: none;
+}
+
+.pdf-subtool-content.active {
+    display: block;
+}
+
+/* Extract Pages Styles */
+#pdf-extract-subtool .batch-upload {
+    cursor: pointer;
+}
+
+.extract-file-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--bg);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.extract-file-info i {
+    font-size: 1.5rem;
+    color: var(--danger);
+}
+
+.extract-file-info span {
+    font-weight: 600;
+}
+
+.extract-file-info .file-size {
+    color: var(--text-secondary) !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem;
+}
+
+.extract-file-info .btn {
+    margin-left: auto;
+}
+
+.extract-toolbar {
+    display: flex;
+    gap: 0.75rem;
+    background: var(--bg);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.extract-range-input {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+.extract-range-input label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.extract-range-input input {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    width: 150px;
+}
+
+.extract-range-input input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.btn-sm {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+#extract-pages-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    background: var(--bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+
+#extract-pages-container .page-card {
+    background: white;
+}
+
+.extract-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+}
+
+#extract-selected-count {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+/* Split PDF Styles */
+.split-page-badge {
+    background: var(--primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.split-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    background: var(--bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    min-height: 150px;
+}
+
+.split-page-card {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+}
+
+.split-page-card .page-thumbnail {
+    aspect-ratio: 8.5/11;
+    background: #f8fafc;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.split-page-card .page-thumbnail canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.split-page-card .page-number {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+.split-more-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    color: var(--text-secondary);
+    min-height: 120px;
+}
+
+.split-more-indicator i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.split-more-indicator span {
+    font-size: 0.85rem;
+}
+
+.split-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+}
+
+.split-options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+.checkbox-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     header .container {
@@ -1302,5 +1566,39 @@ footer {
 
     .pages-container {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    
+    .pdf-subtabs {
+        justify-content: center;
+    }
+    
+    .subtab {
+        flex: 1;
+        min-width: 140px;
+        justify-content: center;
+    }
+    
+    .extract-range-input {
+        margin-left: 0;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    .extract-range-input input {
+        flex: 1;
+    }
+    
+    .extract-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .split-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .split-preview {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
 }

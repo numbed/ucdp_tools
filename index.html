@@ -15,16 +15,30 @@
                 <span data-i18n="officeTools">Office Tools</span>
             </div>
             <nav>
-                <a href="#" class="nav-link active" data-tool="pdf"><i class="fas fa-file-pdf"></i> <span data-i18n="pdfEditor">PDF Editor</span></a>
-                <a href="#" class="nav-link" data-tool="batch"><i class="fas fa-layer-group"></i> <span data-i18n="batchCompress">Batch Compress</span></a>
-                <a href="#" class="nav-link" data-tool="append"><i class="fas fa-plus-circle"></i> <span data-i18n="batchAppend">Batch Append</span></a>
+                <a href="#" class="nav-link active" data-tool="pdf-tools"><i class="fas fa-file-pdf"></i> <span data-i18n="pdfTools">PDF Tools</span></a>
                 <a href="#" class="nav-link" data-tool="currency"><i class="fas fa-euro-sign"></i> <span data-i18n="bgnEur">BGN/EUR</span></a>
+                <a href="https://numbed.github.io/ucdp-et-tool/" class="nav-link" target="_blank"><i class="fas fa-external-link-alt"></i> <span data-i18n="etTool">ET Tool</span></a>
                 <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">BG</button>
             </nav>
         </div>
     </header>
 
-    <main class="container">
+    <!-- PDF Tools Section -->
+    <main id="pdf-tools-section" class="pdf-tools-section">
+        <div class="container">
+            <!-- PDF Tools Subtabs -->
+            <div class="pdf-subtabs">
+                <button class="subtab active" data-subtool="editor"><i class="fas fa-edit"></i> <span data-i18n="pdfEditor">PDF Editor</span></button>
+                <button class="subtab" data-subtool="batch"><i class="fas fa-compress-arrows-alt"></i> <span data-i18n="batchCompress">Batch Compress</span></button>
+                <button class="subtab" data-subtool="append"><i class="fas fa-plus-circle"></i> <span data-i18n="batchAppend">Batch Append</span></button>
+                <button class="subtab" data-subtool="extract"><i class="fas fa-file-export"></i> <span data-i18n="extractPages">Extract Pages</span></button>
+                <button class="subtab" data-subtool="split"><i class="fas fa-cut"></i> <span data-i18n="splitPdf">Split PDF</span></button>
+            </div>
+        </div>
+
+        <!-- PDF Editor Subtool -->
+        <div id="pdf-editor-subtool" class="pdf-subtool-content active">
+            <div class="container">
         <!-- Upload Section -->
         <section id="upload-section" class="upload-section">
             <div class="upload-box" id="upload-box">
@@ -113,10 +127,11 @@
                 <span id="status-message"></span>
             </div>
         </section>
-    </main>
+            </div>
+        </div>
 
-    <!-- Batch Compress Section -->
-    <main id="batch-section" class="batch-section" style="display: none;">
+        <!-- Batch Compress Subtool -->
+        <div id="pdf-batch-subtool" class="pdf-subtool-content">
         <div class="container">
             <div class="batch-card">
                 <div class="batch-header">
@@ -175,10 +190,10 @@
                 </div>
             </div>
         </div>
-    </main>
+        </div>
 
-    <!-- Batch Append Section -->
-    <main id="append-section" class="batch-section" style="display: none;">
+        <!-- Batch Append Subtool -->
+        <div id="pdf-append-subtool" class="pdf-subtool-content">
         <div class="container">
             <div class="batch-card">
                 <div class="batch-header">
@@ -233,6 +248,118 @@
                     <span id="append-progress-text">0%</span>
                 </div>
             </div>
+        </div>
+        </div>
+
+        <!-- Extract Pages Subtool -->
+        <div id="pdf-extract-subtool" class="pdf-subtool-content">
+        <div class="container">
+            <div class="batch-card">
+                <div class="batch-header">
+                    <h2><i class="fas fa-file-export"></i> <span data-i18n="extractPdfPages">Extract PDF Pages</span></h2>
+                    <p data-i18n="extractDescription">Select pages from a PDF file to extract and download</p>
+                </div>
+
+                <div class="batch-upload" id="extract-upload">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3 data-i18n="dropPdfFileHere">Drop PDF file here</h3>
+                    <p data-i18n="clickToSelectFile">or click to select a file</p>
+                </div>
+                <input type="file" id="extract-input" accept=".pdf" hidden>
+
+                <div id="extract-editor" style="display: none;">
+                    <div class="extract-file-info">
+                        <i class="fas fa-file-pdf"></i>
+                        <span id="extract-file-name">document.pdf</span>
+                        <span class="file-size" id="extract-file-size">(0 MB)</span>
+                        <button class="btn btn-sm" id="extract-close-btn">
+                            <i class="fas fa-times"></i> <span data-i18n="close">Close</span>
+                        </button>
+                    </div>
+
+                    <div class="extract-toolbar">
+                        <button class="btn" id="extract-select-all">
+                            <i class="fas fa-check-double"></i> <span data-i18n="selectAll">Select All</span>
+                        </button>
+                        <button class="btn" id="extract-deselect-all">
+                            <i class="fas fa-square"></i> <span data-i18n="deselectAll">Deselect All</span>
+                        </button>
+                        <div class="extract-range-input">
+                            <label data-i18n="pageRange">Page Range:</label>
+                            <input type="text" id="extract-range" placeholder="e.g., 1-3, 5, 7-9">
+                            <button class="btn btn-sm" id="apply-range-btn">
+                                <i class="fas fa-check"></i> <span data-i18n="apply">Apply</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="pages-container" id="extract-pages-container">
+                        <!-- Page thumbnails will be rendered here -->
+                    </div>
+
+                    <div class="extract-actions">
+                        <span id="extract-selected-count">0 <span data-i18n="pagesSelected">pages selected</span></span>
+                        <button class="btn btn-primary" id="extract-download-btn" disabled>
+                            <i class="fas fa-download"></i> <span data-i18n="extractAndDownload">Extract & Download</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Split PDF Subtool -->
+        <div id="pdf-split-subtool" class="pdf-subtool-content">
+        <div class="container">
+            <div class="batch-card">
+                <div class="batch-header">
+                    <h2><i class="fas fa-cut"></i> <span data-i18n="splitPdfPages">Split PDF into Pages</span></h2>
+                    <p data-i18n="splitDescription">Split a PDF file into individual pages and download them</p>
+                </div>
+
+                <div class="batch-upload" id="split-upload">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3 data-i18n="dropPdfFileHere">Drop PDF file here</h3>
+                    <p data-i18n="clickToSelectFile">or click to select a file</p>
+                </div>
+                <input type="file" id="split-input" accept=".pdf" hidden>
+
+                <div id="split-editor" style="display: none;">
+                    <div class="extract-file-info">
+                        <i class="fas fa-file-pdf"></i>
+                        <span id="split-file-name">document.pdf</span>
+                        <span class="file-size" id="split-file-size">(0 MB)</span>
+                        <span id="split-page-count" class="split-page-badge">0 pages</span>
+                        <button class="btn btn-sm" id="split-close-btn">
+                            <i class="fas fa-times"></i> <span data-i18n="close">Close</span>
+                        </button>
+                    </div>
+
+                    <div class="split-preview" id="split-preview">
+                        <!-- Page previews will be rendered here -->
+                    </div>
+
+                    <div class="split-actions">
+                        <div class="split-options">
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="split-zip-option" checked>
+                                <span data-i18n="downloadAsZip">Download as ZIP</span>
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" id="split-download-btn">
+                            <i class="fas fa-download"></i> <span data-i18n="splitAndDownload">Split & Download</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="batch-progress" id="split-progress" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="split-progress-fill"></div>
+                    </div>
+                    <span id="split-progress-text">0%</span>
+                </div>
+            </div>
+        </div>
         </div>
     </main>
 
@@ -349,6 +476,7 @@
     <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     
     <!-- Application Modules (order matters - translations and main.js must be first) -->
     <script src="js/translations.js"></script>
@@ -357,6 +485,8 @@
     <script src="js/pdf-compress.js"></script>
     <script src="js/pdf-reorder.js"></script>
     <script src="js/pdf-merge.js"></script>
+    <script src="js/pdf-extract.js"></script>
+    <script src="js/pdf-split.js"></script>
     <script src="js/batch-compress.js"></script>
     <script src="js/batch-append.js"></script>
     <script src="js/currency.js"></script>

@@ -4,10 +4,13 @@ const translations = {
     en: {
         // Header
         officeTools: 'Office Tools',
+        pdfTools: 'PDF Tools',
         pdfEditor: 'PDF Editor',
         batchCompress: 'Batch Compress',
         batchAppend: 'Batch Append',
+        extractPages: 'Extract Pages',
         bgnEur: 'BGN/EUR',
+        etTool: 'ET Tool',
         
         // PDF Editor - Upload
         uploadPdfFile: 'Upload PDF File',
@@ -106,15 +109,45 @@ const translations = {
         pleaseDropPdfs: 'Please drop PDF files only',
         notAPdf: '{0} is not a PDF',
         alreadyAdded: '{0} already added',
-        errorReading: 'Error reading {0}'
+        errorReading: 'Error reading {0}',
+        
+        // Extract Pages
+        extractPdfPages: 'Extract PDF Pages',
+        extractDescription: 'Select pages from a PDF file to extract and download',
+        dropPdfFileHere: 'Drop PDF file here',
+        clickToSelectFile: 'or click to select a file',
+        pageRange: 'Page Range:',
+        apply: 'Apply',
+        pagesSelected: 'pages selected',
+        extractAndDownload: 'Extract & Download',
+        invalidPageRange: 'Invalid page range',
+        selectedPages: 'Selected {0} pages',
+        extractingPages: 'Extracting pages...',
+        extractedPages: 'Extracted {0} pages successfully!',
+        errorExtracting: 'Error extracting pages',
+        
+        // Split PDF
+        splitPdf: 'Split PDF',
+        splitPdfPages: 'Split PDF into Pages',
+        splitDescription: 'Split a PDF file into individual pages and download them',
+        morePages: 'more pages',
+        downloadAsZip: 'Download as ZIP',
+        splitAndDownload: 'Split & Download',
+        splittingPdf: 'Splitting PDF...',
+        creatingZip: 'Creating ZIP file...',
+        splitComplete: 'Split complete! {0} pages created',
+        errorSplitting: 'Error splitting PDF'
     },
     bg: {
         // Header
         officeTools: 'Офис Инструменти',
+        pdfTools: 'PDF Инструменти',
         pdfEditor: 'PDF Редактор',
         batchCompress: 'Групово Компресиране',
         batchAppend: 'Групово Добавяне',
+        extractPages: 'Извличане на страници',
         bgnEur: 'лв/EUR',
+        etTool: 'ET Инструмент',
         
         // PDF Editor - Upload
         uploadPdfFile: 'Качване на PDF файл',
@@ -213,7 +246,34 @@ const translations = {
         pleaseDropPdfs: 'Моля, пуснете само PDF файлове',
         notAPdf: '{0} не е PDF',
         alreadyAdded: '{0} вече е добавен',
-        errorReading: 'Грешка при четене на {0}'
+        errorReading: 'Грешка при четене на {0}',
+        
+        // Extract Pages
+        extractPdfPages: 'Извличане на PDF страници',
+        extractDescription: 'Изберете страници от PDF файл за извличане и изтегляне',
+        dropPdfFileHere: 'Пуснете PDF файл тук',
+        clickToSelectFile: 'или кликнете за избор на файл',
+        pageRange: 'Диапазон от страници:',
+        apply: 'Приложи',
+        pagesSelected: 'страници избрани',
+        extractAndDownload: 'Извлечи и изтегли',
+        invalidPageRange: 'Невалиден диапазон от страници',
+        selectedPages: 'Избрани {0} страници',
+        extractingPages: 'Извличане на страници...',
+        extractedPages: 'Успешно извлечени {0} страници!',
+        errorExtracting: 'Грешка при извличане на страници',
+        
+        // Split PDF
+        splitPdf: 'Раздели PDF',
+        splitPdfPages: 'Раздели PDF на страници',
+        splitDescription: 'Разделете PDF файл на отделни страници и ги изтеглете',
+        morePages: 'още страници',
+        downloadAsZip: 'Изтегли като ZIP',
+        splitAndDownload: 'Раздели и изтегли',
+        splittingPdf: 'Разделяне на PDF...',
+        creatingZip: 'Създаване на ZIP файл...',
+        splitComplete: 'Разделянето завърши! Създадени {0} страници',
+        errorSplitting: 'Грешка при разделяне на PDF'
     }
 };
 
