@@ -17,6 +17,7 @@ const defaultHolidays = [
 	{ "date": "2026-12-24", "name": "Бъдни вечер" },
 	{ "date": "2026-12-25", "name": "Коледа" },
 	{ "date": "2026-12-26", "name": "Коледа" },
+	{ "date": "2026-12-27", "name": "Коледа" },
 	{ "date": "2026-12-28", "name": "Коледа" }
 ];
 
@@ -57,13 +58,16 @@ function renderHolidays() {
 	
 	list.innerHTML = holidays.map(h => {
 		const date = new Date(h.date);
+		const dayOfWeek = date.getDay();
+		const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+		const dayClass = isWeekend ? 'weekend' : 'weekday';
 		const formattedDate = date.toLocaleDateString('bg-BG', {
 			day: '2-digit',
 			month: '2-digit',
 			year: 'numeric',
-			weekday: 'short'
+			weekday: 'long'
 		});
-		return `<div class="holiday-item">
+		return `<div class="holiday-item ${dayClass}">
 			<div class="holiday-date">${formattedDate}</div>
 			<div class="holiday-name">${h.name}</div>
 		</div>`;
