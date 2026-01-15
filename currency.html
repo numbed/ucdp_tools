@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Tools - Currency Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="Office Tools">
+                <span data-i18n="officeTools">Office Tools</span>
+            </div>
+            <nav>
+                <a href="index.html" class="nav-link"><i class="fas fa-file-pdf"></i> <span data-i18n="pdfTools">PDF Tools</span></a>
+                <a href="currency.html" class="nav-link active"><i class="fas fa-euro-sign"></i> <span data-i18n="bgnEur">BGN/EUR</span></a>
+                <a href="date-calculator.html" class="nav-link"><i class="fas fa-calendar-alt"></i> <span data-i18n="dateCalc">Date Calculator</span></a>
+                <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">BG</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Currency Calculator Section -->
+    <main id="currency-section" class="currency-section">
+        <div class="container">
+            <div class="currency-card">
+                <div class="currency-header">
+                    <h2><i class="fas fa-exchange-alt"></i> <span data-i18n="bgnEurConverter">BGN ↔ EUR Converter</span></h2>
+                    <p class="currency-info"><span data-i18n="fixedRate">Fixed rate for Bulgaria's Eurozone entry:</span> <strong>1 EUR = 1.95583 BGN</strong></p>
+                </div>
+                
+                <div class="currency-converter">
+                    <div class="currency-input-group">
+                        <label for="bgn-input">
+                            <span class="currency-flag">🇧🇬</span> <span data-i18n="bulgarianLev">Bulgarian Lev (BGN)</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" id="bgn-input" placeholder="0.00" step="0.01">
+                            <span class="currency-symbol">лв</span>
+                        </div>
+                    </div>
+                    
+                    <button class="swap-btn" id="swap-currency" title="Swap currencies">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                    
+                    <div class="currency-input-group">
+                        <label for="eur-input">
+                            <span class="currency-flag">🇪🇺</span> <span data-i18n="euro">Euro (EUR)</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" id="eur-input" placeholder="0.00" step="0.01">
+                            <span class="currency-symbol">€</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-convert">
+                    <h4 data-i18n="quickConvert">Quick Convert</h4>
+                    <div class="quick-buttons">
+                        <button class="quick-btn" data-bgn="10">10 лв</button>
+                        <button class="quick-btn" data-bgn="20">20 лв</button>
+                        <button class="quick-btn" data-bgn="50">50 лв</button>
+                        <button class="quick-btn" data-bgn="100">100 лв</button>
+                        <button class="quick-btn" data-eur="10">10 €</button>
+                        <button class="quick-btn" data-eur="20">20 €</button>
+                        <button class="quick-btn" data-eur="50">50 €</button>
+                        <button class="quick-btn" data-eur="100">100 €</button>
+                    </div>
+                </div>
+                
+                <div class="conversion-table">
+                    <h4 data-i18n="referenceTable">Reference Table</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BGN (лв)</th>
+                                <th>EUR (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1.00</td><td>0.51</td></tr>
+                            <tr><td>5.00</td><td>2.56</td></tr>
+                            <tr><td>10.00</td><td>5.11</td></tr>
+                            <tr><td>20.00</td><td>10.23</td></tr>
+                            <tr><td>50.00</td><td>25.56</td></tr>
+                            <tr><td>100.00</td><td>51.13</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Office Tools. Built for productivity.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Application Modules -->
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/currency.js"></script>
+</body>
+</html>

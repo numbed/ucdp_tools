@@ -1,7 +1,9 @@
 // ==================== MAIN.JS - Shared State, Utilities & Initialization ====================
 
-// PDF.js configuration
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+// PDF.js configuration - only if PDF.js is loaded
+if (typeof pdfjsLib !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
 
 // Currency rate (fixed for Bulgaria's Eurozone entry)
 const BGN_EUR_RATE = 1.95583;
@@ -24,7 +26,7 @@ let mergeModal, mergeInput, mergeUploadBox, mergeFileList, doMergeBtn;
 // ==================== INITIALIZATION ====================
 
 function init() {
-    // Get DOM elements
+    // Get DOM elements (only if they exist - for PDF tools page)
     pdfInput = document.getElementById('pdf-input');
     uploadBox = document.getElementById('upload-box');
     uploadSection = document.getElementById('upload-section');
@@ -55,120 +57,100 @@ function init() {
     // Apply translations
     updateAllTranslations();
     
-    // File upload events
-    uploadBox.addEventListener('click', () => pdfInput.click());
-    pdfInput.addEventListener('change', handleFileSelect);
-    
-    // Drag and drop
-    uploadBox.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        uploadBox.classList.add('dragover');
-    });
-    
-    uploadBox.addEventListener('dragleave', () => {
-        uploadBox.classList.remove('dragover');
-    });
-    
-    uploadBox.addEventListener('drop', (e) => {
-        e.preventDefault();
-        uploadBox.classList.remove('dragover');
-        const file = e.dataTransfer.files[0];
-        if (file && file.type === 'application/pdf') {
-            loadPDF(file);
-        } else {
-            showToast('Please drop a PDF file', 'error');
+    // Only setup PDF-related events if on PDF tools page
+    if (uploadBox && pdfInput) {
+        // File upload events
+        uploadBox.addEventListener('click', () => pdfInput.click());
+        pdfInput.addEventListener('change', handleFileSelect);
+        
+        // Drag and drop
+        uploadBox.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadBox.classList.add('dragover');
+        });
+        
+        uploadBox.addEventListener('dragleave', () => {
+            uploadBox.classList.remove('dragover');
+        });
+        
+        uploadBox.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadBox.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type === 'application/pdf') {
+                loadPDF(file);
+            } else {
+                showToast('Please drop a PDF file', 'error');
+            }
+        });
+        
+        // Toolbar buttons
+        if (selectAllBtn) selectAllBtn.addEventListener('click', selectAllPages);
+        if (deselectAllBtn) deselectAllBtn.addEventListener('click', deselectAllPages);
+        if (deleteBtn) deleteBtn.addEventListener('click', deleteSelectedPages);
+        if (downloadBtn) downloadBtn.addEventListener('click', downloadPDF);
+        if (closeBtn) closeBtn.addEventListener('click', closePDF);
+        
+        // Reorder buttons
+        if (reorderBtn) reorderBtn.addEventListener('click', toggleReorderMode);
+        if (applyOrderBtn) applyOrderBtn.addEventListener('click', applyNewOrder);
+        if (cancelOrderBtn) cancelOrderBtn.addEventListener('click', cancelReorder);
+        
+        // Merge functionality
+        if (mergeBtn) mergeBtn.addEventListener('click', openMergeModal);
+        const closeMergeModalBtn = document.getElementById('close-merge-modal');
+        if (closeMergeModalBtn) closeMergeModalBtn.addEventListener('click', closeMergeModal);
+        if (mergeUploadBox && mergeInput) {
+            mergeUploadBox.addEventListener('click', () => mergeInput.click());
+            mergeInput.addEventListener('change', handleMergeFileSelect);
+            const clearMergeListBtn = document.getElementById('clear-merge-list');
+            if (clearMergeListBtn) clearMergeListBtn.addEventListener('click', clearMergeList);
+            if (doMergeBtn) doMergeBtn.addEventListener('click', performMerge);
+            
+            // Merge drag and drop
+            mergeUploadBox.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                mergeUploadBox.classList.add('dragover');
+            });
+            
+            mergeUploadBox.addEventListener('dragleave', () => {
+                mergeUploadBox.classList.remove('dragover');
+            });
+            
+            mergeUploadBox.addEventListener('drop', (e) => {
+                e.preventDefault();
+                mergeUploadBox.classList.remove('dragover');
+                handleMergeFileDrop(e.dataTransfer.files);
+            });
         }
-    });
-    
-    // Toolbar buttons
-    selectAllBtn.addEventListener('click', selectAllPages);
-    deselectAllBtn.addEventListener('click', deselectAllPages);
-    deleteBtn.addEventListener('click', deleteSelectedPages);
-    downloadBtn.addEventListener('click', downloadPDF);
-    closeBtn.addEventListener('click', closePDF);
-    
-    // Reorder buttons
-    reorderBtn.addEventListener('click', toggleReorderMode);
-    applyOrderBtn.addEventListener('click', applyNewOrder);
-    cancelOrderBtn.addEventListener('click', cancelReorder);
-    
-    // Merge functionality
-    mergeBtn.addEventListener('click', openMergeModal);
-    document.getElementById('close-merge-modal').addEventListener('click', closeMergeModal);
-    mergeUploadBox.addEventListener('click', () => mergeInput.click());
-    mergeInput.addEventListener('change', handleMergeFileSelect);
-    document.getElementById('clear-merge-list').addEventListener('click', clearMergeList);
-    doMergeBtn.addEventListener('click', performMerge);
-    
-    // Merge drag and drop
-    mergeUploadBox.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        mergeUploadBox.classList.add('dragover');
-    });
-    
-    mergeUploadBox.addEventListener('dragleave', () => {
-        mergeUploadBox.classList.remove('dragover');
-    });
-    
-    mergeUploadBox.addEventListener('drop', (e) => {
-        e.preventDefault();
-        mergeUploadBox.classList.remove('dragover');
-        handleMergeFileDrop(e.dataTransfer.files);
-    });
-    
-    // Modal close on backdrop click
-    mergeModal.addEventListener('click', (e) => {
-        if (e.target === mergeModal) {
-            closeMergeModal();
+        
+        // Modal close on backdrop click
+        if (mergeModal) {
+            mergeModal.addEventListener('click', (e) => {
+                if (e.target === mergeModal) {
+                    closeMergeModal();
+                }
+            });
         }
-    });
+        
+        // Compression dropdown
+        setupCompressionOptions();
+        
+        // Setup other PDF tools
+        if (typeof setupBatchCompression === 'function') setupBatchCompression();
+        if (typeof setupBatchAppend === 'function') setupBatchAppend();
+        if (typeof setupPdfExtract === 'function') setupPdfExtract();
+        if (typeof setupPdfSplit === 'function') setupPdfSplit();
+    }
     
-    // Compression dropdown
-    setupCompressionOptions();
-    
-    // Setup other tools
-    setupBatchCompression();
-    setupBatchAppend();
-    setupCurrencyCalculator();
-    setupPdfExtract();
-    setupPdfSplit();
+    // Setup currency calculator (only on currency page)
+    if (typeof setupCurrencyCalculator === 'function') setupCurrencyCalculator();
 }
 
 // ==================== NAVIGATION ====================
 
 function setupNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const pdfToolsSection = document.getElementById('pdf-tools-section');
-    const currencySection = document.getElementById('currency-section');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            // Skip external links (let them navigate normally)
-            if (link.getAttribute('target') === '_blank' || link.href.startsWith('http')) {
-                return;
-            }
-            
-            e.preventDefault();
-            const tool = link.dataset.tool;
-            
-            // Update active nav
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            
-            // Hide all sections
-            pdfToolsSection.style.display = 'none';
-            currencySection.style.display = 'none';
-            
-            // Show selected section
-            if (tool === 'pdf-tools') {
-                pdfToolsSection.style.display = 'block';
-            } else if (tool === 'currency') {
-                currencySection.style.display = 'flex';
-            }
-        });
-    });
-    
-    // Setup PDF subtabs
+    // Setup PDF subtabs (only on PDF tools page)
     setupPdfSubtabs();
 }
 

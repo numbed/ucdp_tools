@@ -11,6 +11,7 @@ const translations = {
         extractPages: 'Extract Pages',
         bgnEur: 'BGN/EUR',
         etTool: 'ET Tool',
+        dateCalc: 'Date Calculator',
         
         // PDF Editor - Upload
         uploadPdfFile: 'Upload PDF File',
@@ -148,6 +149,7 @@ const translations = {
         extractPages: 'Извличане на страници',
         bgnEur: 'лв/EUR',
         etTool: 'ET Инструмент',
+        dateCalc: 'Калкулатор за дати',
         
         // PDF Editor - Upload
         uploadPdfFile: 'Качване на PDF файл',

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+	<meta charset='UTF-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<title>Office Tools - Date Calculator</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel='stylesheet' href='styles.css'>
+</head>
+
+<body>
+	<header>
+		<div class="container">
+			<div class="logo">
+				<img src="logo.png" alt="Office Tools">
+				<span data-i18n="officeTools">Office Tools</span>
+			</div>
+			<nav>
+				<a href="index.html" class="nav-link"><i class="fas fa-file-pdf"></i> <span data-i18n="pdfTools">PDF Tools</span></a>
+				<a href="currency.html" class="nav-link"><i class="fas fa-euro-sign"></i> <span data-i18n="bgnEur">BGN/EUR</span></a>
+				<a href="date-calculator.html" class="nav-link active"><i class="fas fa-calendar-alt"></i> <span data-i18n="dateCalc">Date Calculator</span></a>
+				<button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">BG</button>
+			</nav>
+		</div>
+	</header>
+
+	<main class="date-calculator-section">
+		<div class="container">
+			<div class="date-calc-grid">
+				<!-- Date Calculator Card -->
+				<div class="calc-card">
+					<div class="calc-header">
+						<h2><i class="fas fa-calendar-alt"></i> Калкулатор за дати</h2>
+						<p>Изчислява крайна дата спрямо работни дни</p>
+					</div>
+					<div class="calc-body">
+						<div class="calc-input-group">
+							<label for='input-date'>Въведете дата:</label>
+							<div class="date-input-wrapper">
+								<input type='date' id='input-date' onchange='calculateDate()'>
+								<span id='input-day' class="day-badge"></span>
+							</div>
+						</div>
+						<div class="calc-result" id="date-result-box">
+							<div class="result-label">Резултат:</div>
+							<div class="result-value" id='result'>—</div>
+							<div class="result-day" id='result-day'></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Bid/Guarantee Calculator Card -->
+				<div class="calc-card">
+					<div class="calc-header">
+						<h2><i class="fas fa-calculator"></i> Стъпка и гаранция</h2>
+						<p>Изчислява стъпка и гаранция за търг</p>
+					</div>
+					<div class="calc-body">
+						<div class="currency-input-group">
+							<label for='priceBGN'>Сума (EUR):</label>
+							<div class="input-wrapper">
+								<input type='number' id='priceBGN' step='0.01' min='0' placeholder="0.00" onchange='calculateMoney()'>
+								<span class="currency-symbol">€</span>
+							</div>
+						</div>
+						<div class="money-results">
+							<div class="money-result-item">
+								<span class="money-label">Стъпка EUR:</span>
+								<span class="money-value" id='bidBGN'>—</span>
+							</div>
+							<div class="money-result-item highlight">
+								<span class="money-label">Гаранция EUR:</span>
+								<span class="money-value" id='guaranteeBGN'>—</span>
+								<span class="money-percentage" id='percentageBGN'></span>
+							</div>
+							<div class="money-result-item">
+								<span class="money-label">Точна 5% EUR:</span>
+								<span class="money-value" id='fivePBGN'>—</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Holidays Section -->
+			<div class="holidays-card">
+				<div class="calc-header">
+					<h2><i class="fas fa-umbrella-beach"></i> Почивни дни 2026</h2>
+					<p>Официални празници в България</p>
+				</div>
+				<div class="holidays-list" id="holidays-list"></div>
+			</div>
+		</div>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>&copy; 2026 Office Tools. Built for productivity.</p>
+		</div>
+	</footer>
+
+	<!-- Toast Container -->
+	<div id="toast-container"></div>
+
+	<script src="js/translations.js"></script>
+	<script src="js/main.js"></script>
+	<script src='js/date-calculator.js'></script>
+</body>
+
+</html>

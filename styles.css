@@ -1,17 +1,24 @@
 :root {
     --primary: #2563eb;
     --primary-hover: #1d4ed8;
+    --primary-light: rgba(37, 99, 235, 0.1);
     --success: #10b981;
     --success-hover: #059669;
+    --success-light: rgba(16, 185, 129, 0.1);
     --danger: #ef4444;
     --danger-hover: #dc2626;
+    --warning: #f59e0b;
     --bg: #f1f5f9;
     --surface: #ffffff;
     --text: #1e293b;
     --text-secondary: #64748b;
     --border: #e2e8f0;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
+    --radius: 8px;
+    --radius-lg: 16px;
+    --transition: 0.2s ease;
 }
 
 * {
@@ -1543,6 +1550,25 @@ footer {
         flex-direction: column;
         gap: 1rem;
     }
+    
+    nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+    }
+    
+    .nav-link span {
+        display: none;
+    }
+    
+    .nav-link i {
+        font-size: 1.1rem;
+    }
 
     .upload-box {
         padding: 2rem;
@@ -1574,8 +1600,13 @@ footer {
     
     .subtab {
         flex: 1;
-        min-width: 140px;
+        min-width: 60px;
         justify-content: center;
+        padding: 0.6rem 0.75rem;
+    }
+    
+    .subtab span {
+        display: none;
     }
     
     .extract-range-input {
@@ -1600,5 +1631,314 @@ footer {
     
     .split-preview {
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+    
+    .currency-card {
+        padding: 1.5rem;
+    }
+    
+    .currency-input-group input {
+        font-size: 1.25rem;
+        padding: 0.875rem 2.5rem 0.875rem 0.875rem;
+    }
+    
+    .quick-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .batch-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .logo span {
+        display: none;
+    }
+    
+    .upload-box {
+        padding: 1.5rem;
+    }
+    
+    .upload-box i {
+        font-size: 2.5rem;
+    }
+    
+    .upload-box h2 {
+        font-size: 1.1rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.85rem;
+    }
+    
+    .btn span {
+        display: none;
+    }
+    
+    .pages-container {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .status-bar {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+}
+
+/* ==================== DATE CALCULATOR STYLES ==================== */
+.date-calculator-section {
+    padding: 2rem 0;
+    min-height: calc(100vh - 200px);
+}
+
+.date-calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.calc-card {
+    background: var(--surface);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.calc-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.calc-header h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+    font-size: 1.25rem;
+}
+
+.calc-header h2 i {
+    color: var(--primary);
+}
+
+.calc-header p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.calc-body {
+    padding: 1.5rem;
+}
+
+.calc-input-group {
+    margin-bottom: 1.5rem;
+}
+
+.calc-input-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.date-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.date-input-wrapper input[type="date"] {
+    flex: 1;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.date-input-wrapper input[type="date"]:focus {
+    border-color: var(--primary);
+}
+
+.day-badge {
+    background: var(--bg);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.calc-result {
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.calc-result .result-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.calc-result .result-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+
+.calc-result .result-day {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.calc-result.error .result-value {
+    color: var(--danger);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Money Results */
+.money-results {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.money-result-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: var(--bg);
+    border-radius: 8px;
+}
+
+.money-result-item.highlight {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(139, 92, 246, 0.1));
+    border: 2px solid var(--primary);
+}
+
+.money-label {
+    font-weight: 500;
+    color: var(--text);
+}
+
+.money-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--success);
+}
+
+.money-percentage {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-left: 0.5rem;
+}
+
+/* Holidays Card */
+.holidays-card {
+    background: var(--surface);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.holidays-card .holidays-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+    padding: 1.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.holiday-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg);
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.holiday-item:hover {
+    background: rgba(37, 99, 235, 0.05);
+    transform: translateX(4px);
+}
+
+.holiday-date {
+    font-weight: 600;
+    color: var(--primary);
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+.holiday-name {
+    color: var(--text);
+    flex: 1;
+}
+
+.no-holidays {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 2rem;
+    grid-column: 1 / -1;
+}
+
+/* Date Calculator Responsive */
+@media (max-width: 768px) {
+    .date-calc-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .holidays-card .holidays-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .date-input-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .day-badge {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .calc-header h2 {
+        font-size: 1.1rem;
+    }
+    
+    .calc-body {
+        padding: 1rem;
+    }
+    
+    .money-result-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .money-value {
+        font-size: 1.5rem;
     }
 }
