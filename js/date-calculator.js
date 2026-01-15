@@ -97,7 +97,15 @@ function calculateDate() {
 		document.querySelector('#result').textContent = message;
 		document.querySelector('#result-day').textContent = '';
 		document.querySelector('#input-day').textContent = `(${inputDay})`;
-		if (resultBox) resultBox.classList.add('error');
+		if (resultBox) {
+			resultBox.classList.remove('result-passed', 'result-today', 'result-future');
+			resultBox.classList.add('error');
+			// Remove any status messages
+			const existingStatus = resultBox.querySelector('.result-status');
+			if (existingStatus) {
+				existingStatus.remove();
+			}
+		}
 		return;
 	}
 	
@@ -145,7 +153,7 @@ function calculateDate() {
 	resultDate.setHours(0, 0, 0, 0);
 	
 	if (resultBox) {
-		resultBox.classList.remove('result-passed', 'result-today');
+		resultBox.classList.remove('result-passed', 'result-today', 'result-future');
 		
 		if (resultDate.getTime() === now.getTime()) {
 			resultBox.classList.add('result-today');
@@ -168,6 +176,7 @@ function calculateDate() {
 				resultBox.querySelector('.result-status').innerHTML = '<i class="fas fa-times-circle"></i> Срокът е изтекъл';
 			}
 		} else {
+			resultBox.classList.add('result-future');
 			const existingStatus = resultBox.querySelector('.result-status');
 			if (existingStatus) {
 				existingStatus.remove();

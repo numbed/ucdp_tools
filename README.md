@@ -1,110 +1,148 @@
-# Office Tools
+# Офис Инструменти / Office Tools
 
-A web-based office tools suite with PDF tools and currency converter. Designed to be hosted on Synology NAS or GitHub Pages for office-wide use.
+Набор от уеб-базирани офис инструменти с PDF функции, валутен конвертор и калкулатор за дати. Проектиран за хостване на Synology NAS или GitHub Pages за използване в офиса.
 
-## Features
+A web-based office tools suite with PDF tools, currency converter, and date calculator. Designed to be hosted on Synology NAS or GitHub Pages for office-wide use.
 
-### PDF Tools
-All PDF-related tools are grouped under one tab with subtabs:
+## Функции / Features
 
-#### PDF Editor
-- **Upload PDFs** - Drag & drop or click to select
-- **View all pages** - Thumbnail grid view of all pages
-- **Select/Delete pages** - Select and remove unwanted pages
-- **Reorder pages** - Drag and drop to rearrange page order
-- **Merge PDFs** - Combine multiple PDF files into one
-- **Compress PDF** - Reduce file size with multiple compression levels (Light, Medium, High, Maximum)
-- **Download** - Save your edited PDF
+### PDF Инструменти / PDF Tools
+Всички PDF инструменти са групирани в отделна страница с подраздели:
 
-#### Batch Compress
-- Compress multiple PDF files at once
-- Choose compression level
-- Download all compressed files
+#### PDF Редактор / PDF Editor
+- **Качване на PDF** - Плъзнете или кликнете за избор
+- **Преглед на всички страници** - Миниатюри на всички страници
+- **Избор/Изтриване на страници** - Изберете и премахнете нежелани страници
+- **Пренареждане на страници** - Плъзнете за промяна на реда
+- **Сливане на PDF** - Обединете множество PDF файлове
+- **Компресиране на PDF** - Намалете размера с различни нива (Леко, Средно, Високо, Максимално)
+- **Изтегляне** - Запазете редактирания PDF
 
-#### Batch Append
-- Append one PDF to multiple target files
-- Useful for adding cover pages or footers to multiple documents
+#### Групово компресиране / Batch Compress
+- Компресирайте множество PDF файлове наведнъж
+- Изберете ниво на компресия
+- Изтеглете всички компресирани файлове като ZIP
 
-#### Extract Pages
-- Select specific pages from a PDF
-- Use page range input (e.g., "1-3, 5, 7-9")
-- Extract and download selected pages as a new PDF
+#### Групово добавяне / Batch Append
+- Добавете един PDF към множество целеви файлове
+- Полезно за добавяне на корици или футъри
 
-#### Split PDF
-- Split a PDF into individual page files
-- Download as ZIP or individual PDFs
-- Progress indicator for large files
+#### Извличане на страници / Extract Pages
+- Изберете конкретни страници от PDF
+- Използвайте диапазон (напр. "1-3, 5, 7-9")
+- Извлечете и изтеглете избраните страници
 
-### BGN/EUR Currency Converter
-- Fixed rate converter for Bulgaria's Eurozone entry (1 EUR = 1.95583 BGN)
-- Quick convert buttons
-- Reference table
+#### Разделяне на PDF / Split PDF
+- Разделете PDF на отделни файлове по страници
+- Изтеглете като ZIP или поотделно
+- Индикатор за прогрес при големи файлове
 
-### External Links
-- **ET Tool** - Link to the UCDP ET Tool
+### Валутен конвертор BGN/EUR
+- Фиксиран курс за влизането на България в еврозоната (1 EUR = 1.95583 BGN)
+- Бързи бутони за конвертиране
+- Референтна таблица
 
-## Internationalization
+### Калкулатор за дати / Date Calculator
+- **Изчисляване на дати** - Изчислява крайни срокове (18-20 работни дни назад)
+- **Проверка на праздници** - Автоматично отчита почивни дни
+- **Калкулатор за обезпечения** - Изчислява 1% оферта и 5% гаранция
+- **Визуално състояние** - Цветово кодиране: зелено (предстоящ), оранжево (днес), червено (изтекъл)
+- **База данни с празници** - Включва официални български празници с цветово кодиране (син - делничен ден, червен - уикенд)
 
-Supports two languages:
-- 🇬🇧 English
-- 🇧🇬 Bulgarian
+### Помощ / Help Page
+- **Подробна документация** - Пълно ръководство за всички инструменти на български
+- **Често задавани въпроси** - Отговори на типични въпроси
+- **Клавишни комбинации** - Съвети за по-ефективна работа
+- **Визуални примери** - Илюстрирани обяснения на функциите
 
-Toggle language using the button in the navigation bar.
+## Интерфейс / Interface
 
-## Deployment on Synology NAS
+Приложението е изцяло на български език за лесна употреба.
+The application is fully in Bulgarian for easy use in the office.
 
-### Option 1: Web Station (Recommended)
-1. Install **Web Station** from Package Center
-2. Create a folder in your web directory (e.g., `/web/office-tools`)
-3. Copy all files to that folder
-4. Access via `http://your-nas-ip/office-tools`
+## Внедряване / Deployment
 
-### Option 2: Virtual Host
-1. In Web Station, create a virtual host
-2. Point it to the folder containing these files
-3. Access via your configured domain/subdomain
+### Вариант 1: Synology NAS - Web Station (Препоръчва се)
+1. Инсталирайте **Web Station** от Package Center
+2. Създайте папка в уеб директорията (напр. `/web/office-tools`)
+3. Копирайте всички файлове в папката
+4. Достъп чрез `http://your-nas-ip/office-tools`
 
-### Option 3: GitHub Pages
-1. Push to GitHub repository
-2. Enable GitHub Pages in repository settings
-3. Access via `https://username.github.io/repository-name`
+### Вариант 2: Synology NAS - Virtual Host
+1. В Web Station създайте виртуален хост
+2. Насочете го към папката с файловете
+3. Достъп чрез конфигурирания домейн/поддомейн
 
-## Files
+### Вариант 3: GitHub Pages
+1. Качете в GitHub хранилище
+2. Активирайте GitHub Pages в настройките
+3. Достъп чрез `https://username.github.io/repository-name`
+
+## Файлове / Files
 
 ```
 office-tools/
-├── index.html           # Main HTML page
-├── styles.css           # Styling
-├── logo.png             # Logo image
-├── README.md            # This file
+├── index.html              # PDF инструменти / PDF tools page
+├── currency.html           # Валутен конвертор / Currency converter
+├── date-calculator.html    # Калкулатор за дати / Date calculator
+├── help.html               # Помощна страница / Help page
+├── styles.css              # Стилове / Styling
+├── holidays.json           # База данни с празници / Holidays database
+├── logo.png                # Лого / Logo image
+├── README.md               # Документация / Documentation
 └── js/
-    ├── translations.js  # i18n translations (EN/BG)
-    ├── main.js          # Initialization & navigation
-    ├── pdf-editor.js    # PDF viewing & page selection
-    ├── pdf-compress.js  # PDF compression
-    ├── pdf-reorder.js   # Page reordering
-    ├── pdf-merge.js     # PDF merging
-    ├── pdf-extract.js   # Page extraction
-    ├── pdf-split.js     # PDF splitting
-    ├── batch-compress.js # Batch compression
-    ├── batch-append.js  # Batch append
-    └── currency.js      # Currency converter
+    ├── main.js             # Инициализация и навигация / Init & navigation
+    ├── pdf-editor.js       # PDF редактор / PDF editor
+    ├── pdf-compress.js     # Компресиране / Compression
+    ├── pdf-reorder.js      # Пренареждане / Reordering
+    ├── pdf-merge.js        # Сливане / Merging
+    ├── pdf-extract.js      # Извличане / Extraction
+    ├── pdf-split.js        # Разделяне / Splitting
+    ├── batch-compress.js   # Групово компресиране / Batch compress
+    ├── batch-append.js     # Групово добавяне / Batch append
+    ├── currency.js         # Валутен конвертор / Currency converter
+    └── date-calculator.js  # Калкулатор за дати / Date calculator
 ```
 
-## Libraries Used
+## Използвани библиотеки / Libraries Used
 
-- [PDF.js](https://mozilla.github.io/pdf.js/) - PDF rendering
-- [pdf-lib](https://pdf-lib.js.org/) - PDF manipulation
-- [JSZip](https://stuk.github.io/jszip/) - ZIP file creation
-- [Font Awesome](https://fontawesome.com/) - Icons
+- [PDF.js](https://mozilla.github.io/pdf.js/) - Рендиране на PDF / PDF rendering
+- [pdf-lib](https://pdf-lib.js.org/) - Манипулация на PDF / PDF manipulation
+- [JSZip](https://stuk.github.io/jszip/) - Създаване на ZIP / ZIP file creation
+- [Font Awesome](https://fontawesome.com/) - Икони / Icons
 
-## Browser Support
+## Поддръжка на браузъри / Browser Support
 
-Works in all modern browsers:
-- Chrome/Edge (recommended)
+Работи във всички съвременни браузъри:
+- Chrome/Edge (препоръчва се / recommended)
 - Firefox
 - Safari
 
-## Security Note
+## Сигурност / Security Note
+
+Цялата обработка на PDF се извършва **клиентски** в браузъра. Никакви файлове не се качват на сървър - всичко остава на компютъра на потребителя. Това го прави безопасен за чувствителни документи.
 
 All PDF processing happens **client-side** in the browser. No files are uploaded to any server - everything stays on the user's computer. This makes it safe for sensitive documents.
+
+## Технически детайли / Technical Details
+
+- **Технологии**: Чист JavaScript (Vanilla JS), HTML5, CSS3
+- **Нулеви зависимости**: Само външни CDN библиотеки
+- **Responsive дизайн**: Мобилна съвместимост с брейкпойнти на 768px и 480px
+- **Локализация**: Пълна българска локализация
+- **Работа офлайн**: Може да работи локално без интернет (след първо зареждане на CDN библиотеките)
+- **Клиентска обработка**: Всички операции с PDF се извършват локално - без сървърно качване
+
+## Основни подобрения / Recent Improvements
+
+- ✅ Фиксирано рендирането на PDF миниатюри (canvas rendering)
+- ✅ Цветово кодиране на празници (син - делничен, червен - уикенд)
+- ✅ Трицветна индикация за срокове (зелено/оранжево/червено)
+- ✅ Подобрена обработка на грешки при избор на празнични дни
+- ✅ Интегрирана помощна страница с пълна документация
+- ✅ Премахната система за превод - пълна българска локализация
+
+## Лиценз / License
+
+MIT License - свободно за използване и модификация.
+MIT License - free to use and modify.

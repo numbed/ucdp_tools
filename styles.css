@@ -1843,6 +1843,21 @@ footer {
     color: white;
 }
 
+.calc-result.result-future {
+    background: var(--success);
+    color: white;
+    border: 2px solid #16a34a;
+}
+
+.calc-result.result-future .result-label,
+.calc-result.result-future .result-day {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.calc-result.result-future .result-value {
+    color: white;
+}
+
 .result-status {
     display: flex;
     align-items: center;

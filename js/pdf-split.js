@@ -31,7 +31,7 @@ function setupPdfSplit() {
         if (file && file.type === 'application/pdf') {
             loadSplitPdf(file);
         } else {
-            showToast(t('pleaseDropPdf'), 'error');
+            showToast('Моля качете PDF файл', 'error');
         }
     });
     
@@ -49,7 +49,7 @@ async function handleSplitFileSelect(e) {
 
 async function loadSplitPdf(file) {
     try {
-        showToast(t('loadingPdf'), 'info');
+        showToast('Зареждане на PDF...', 'info');
         
         const arrayBuffer = await file.arrayBuffer();
         // Store a copy as Uint8Array to prevent ArrayBuffer detachment issues
@@ -64,7 +64,7 @@ async function loadSplitPdf(file) {
         document.getElementById('split-file-name').textContent = file.name;
         const mb = (splitPdfBytes.byteLength / 1024 / 1024).toFixed(2);
         document.getElementById('split-file-size').textContent = `(${mb} MB)`;
-        document.getElementById('split-page-count').textContent = `${splitPdfDoc.numPages} ${t('pages')}`;
+        document.getElementById('split-page-count').textContent = `${splitPdfDoc.numPages} страници`;
         
         // Show editor, hide upload
         document.getElementById('split-upload').style.display = 'none';
@@ -73,10 +73,10 @@ async function loadSplitPdf(file) {
         // Render page previews
         await renderSplitPreview();
         
-        showToast(t('loadedPages', splitPdfDoc.numPages), 'success');
+        showToast(`Заредени ${splitPdfDoc.numPages} страници`, 'success');
     } catch (error) {
         console.error('Error loading PDF:', error);
-        showToast(t('errorLoadingPdf') + ': ' + error.message, 'error');
+        showToast('Грешка при зареждане на PDF' + ': ' + error.message, 'error');
     }
 }
 
@@ -97,7 +97,7 @@ async function renderSplitPreview() {
         moreIndicator.className = 'split-more-indicator';
         moreIndicator.innerHTML = `
             <i class="fas fa-ellipsis-h"></i>
-            <span>+${splitPdfDoc.numPages - maxPreview} ${t('morePages')}</span>
+            <span>+${splitPdfDoc.numPages - maxPreview} още страници</span>
         `;
         container.appendChild(moreIndicator);
     }
@@ -120,12 +120,16 @@ async function renderSplitThumbnail(pageNum) {
     const pageCard = document.createElement('div');
     pageCard.className = 'split-page-card';
     
-    pageCard.innerHTML = `
-        <div class="page-thumbnail">
-            ${canvas.outerHTML}
-        </div>
-        <div class="page-number">${t('page')} ${pageNum}</div>
-    `;
+    const thumbnailDiv = document.createElement('div');
+    thumbnailDiv.className = 'page-thumbnail';
+    thumbnailDiv.appendChild(canvas);
+    
+    const pageNumberDiv = document.createElement('div');
+    pageNumberDiv.className = 'page-number';
+    pageNumberDiv.textContent = `Страница ${pageNum}`;
+    
+    pageCard.appendChild(thumbnailDiv);
+    pageCard.appendChild(pageNumberDiv);
     
     document.getElementById('split-preview').appendChild(pageCard);
 }
@@ -141,7 +145,7 @@ async function splitAndDownload() {
     progressContainer.style.display = 'block';
     
     try {
-        showToast(t('splittingPdf'), 'info');
+        showToast('Разделяне на PDF...', 'info');
         
         // Load the PDF with pdf-lib
         const pdfLibDoc = await PDFLib.PDFDocument.load(splitPdfBytes);
@@ -169,7 +173,7 @@ async function splitAndDownload() {
             }
             
             // Generate and download ZIP
-            progressText.textContent = t('creatingZip');
+            progressText.textContent = 'Създаване на ZIP архив...';
             const zipBlob = await zip.generateAsync({ type: 'blob' });
             const url = URL.createObjectURL(zipBlob);
             
@@ -208,10 +212,10 @@ async function splitAndDownload() {
             }
         }
         
-        showToast(t('splitComplete', totalPages), 'success');
+        showToast(`Разделени ${totalPages} страници`, 'success');
     } catch (error) {
         console.error('Error splitting PDF:', error);
-        showToast(t('errorSplitting') + ': ' + error.message, 'error');
+        showToast('Грешка при разделяне' + ': ' + error.message, 'error');
     } finally {
         progressContainer.style.display = 'none';
         progressFill.style.width = '0%';

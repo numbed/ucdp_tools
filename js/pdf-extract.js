@@ -35,7 +35,7 @@ function setupPdfExtract() {
         if (file && file.type === 'application/pdf') {
             loadExtractPdf(file);
         } else {
-            showToast(t('pleaseDropPdf'), 'error');
+            showToast('Моля качете PDF файл', 'error');
         }
     });
     
@@ -56,7 +56,7 @@ async function handleExtractFileSelect(e) {
 
 async function loadExtractPdf(file) {
     try {
-        showToast(t('loadingPdf'), 'info');
+        showToast('Зареждане на PDF...', 'info');
         
         const arrayBuffer = await file.arrayBuffer();
         // Store a copy as Uint8Array to prevent ArrayBuffer detachment issues
@@ -79,10 +79,10 @@ async function loadExtractPdf(file) {
         // Render pages
         await renderExtractPages();
         
-        showToast(t('loadedPages', extractPdfDoc.numPages), 'success');
+        showToast(`Заредени ${extractPdfDoc.numPages} страници`, 'success');
     } catch (error) {
         console.error('Error loading PDF:', error);
-        showToast(t('errorLoadingPdf') + ': ' + error.message, 'error');
+        showToast('Грешка при зареждане на PDF: ' + error.message, 'error');
     }
 }
 
@@ -115,12 +115,16 @@ async function renderExtractThumbnail(pageNum) {
     pageCard.className = 'page-card';
     pageCard.dataset.page = pageNum;
     
-    pageCard.innerHTML = `
-        <div class="page-thumbnail">
-            ${canvas.outerHTML}
-        </div>
-        <div class="page-number">${t('page')} ${pageNum}</div>
-    `;
+    const thumbnailDiv = document.createElement('div');
+    thumbnailDiv.className = 'page-thumbnail';
+    thumbnailDiv.appendChild(canvas);
+    
+    const pageNumberDiv = document.createElement('div');
+    pageNumberDiv.className = 'page-number';
+    pageNumberDiv.textContent = `Page ${pageNum}`;
+    
+    pageCard.appendChild(thumbnailDiv);
+    pageCard.appendChild(pageNumberDiv);
     
     pageCard.addEventListener('click', () => toggleExtractPageSelection(pageNum, pageCard));
     
@@ -173,7 +177,7 @@ function applyPageRange() {
     const pages = parsePageRange(rangeStr, extractPdfDoc.numPages);
     
     if (pages.length === 0) {
-        showToast(t('invalidPageRange'), 'error');
+        showToast('Невалиден диапазон на страници', 'error');
         return;
     }
     
@@ -191,7 +195,7 @@ function applyPageRange() {
     });
     
     updateExtractButton();
-    showToast(t('selectedPages', pages.length), 'success');
+    showToast(`Избрани ${pages.length} страници`, 'success');
 }
 
 function parsePageRange(rangeStr, maxPages) {
@@ -227,14 +231,14 @@ function updateExtractButton() {
     const count = extractSelectedPages.size;
     
     btn.disabled = count === 0;
-    countSpan.innerHTML = `${count} <span data-i18n="pagesSelected">${t('pagesSelected')}</span>`;
+    countSpan.innerHTML = `${count} <span data-i18n="pagesSelected">страници избрани</span>`;
 }
 
 async function extractAndDownload() {
     if (extractSelectedPages.size === 0) return;
     
     try {
-        showToast(t('extractingPages'), 'info');
+        showToast('Извличане на страници...', 'info');
         
         // Load the PDF with pdf-lib
         const pdfLibDoc = await PDFLib.PDFDocument.load(extractPdfBytes);
@@ -263,10 +267,10 @@ async function extractAndDownload() {
         
         URL.revokeObjectURL(url);
         
-        showToast(t('extractedPages', pageNumbers.length), 'success');
+        showToast(`Извлечени ${pageNumbers.length} страници`, 'success');
     } catch (error) {
         console.error('Error extracting pages:', error);
-        showToast(t('errorExtracting') + ': ' + error.message, 'error');
+        showToast('Грешка при извличане' + ': ' + error.message, 'error');
     }
 }
 

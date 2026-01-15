@@ -78,12 +78,16 @@ async function renderThumbnail(pageNum) {
         setupPageDragEvents(pageCard);
     }
     
-    pageCard.innerHTML = `
-        <div class="page-thumbnail">
-            ${canvas.outerHTML}
-        </div>
-        <div class="page-number">Page ${displayNum}</div>
-    `;
+    const thumbnailDiv = document.createElement('div');
+    thumbnailDiv.className = 'page-thumbnail';
+    thumbnailDiv.appendChild(canvas);
+    
+    const pageNumberDiv = document.createElement('div');
+    pageNumberDiv.className = 'page-number';
+    pageNumberDiv.textContent = `Page ${displayNum}`;
+    
+    pageCard.appendChild(thumbnailDiv);
+    pageCard.appendChild(pageNumberDiv);
     
     if (!reorderMode) {
         pageCard.addEventListener('click', () => togglePageSelection(pageNum, pageCard));

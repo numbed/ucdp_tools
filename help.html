@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Помощ - Офис Инструменти</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .help-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .help-section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        .help-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .help-section h3 {
+            color: var(--text);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        .help-section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        .help-section ul, .help-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .help-section li {
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        .tip-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05));
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        .tip-box strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .warning-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.05));
+            border-left: 4px solid #ef4444;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        .warning-box strong {
+            color: #ef4444;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .feature-card {
+            background: var(--bg);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .feature-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        .feature-card p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .back-link:hover {
+            gap: 0.75rem;
+        }
+        @media (max-width: 768px) {
+            .help-content {
+                padding: 1rem;
+            }
+            .help-section {
+                padding: 1.5rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="Офис Инструменти">
+                <span>Офис Инструменти</span>
+            </div>
+            <nav>
+                <a href="index.html" class="nav-link"><i class="fas fa-file-pdf"></i> <span>PDF Инструменти</span></a>
+                <a href="currency.html" class="nav-link"><i class="fas fa-euro-sign"></i> <span>лв/EUR</span></a>
+                <a href="date-calculator.html" class="nav-link"><i class="fas fa-calendar-alt"></i> <span>Калкулатор за дати</span></a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="help-content">
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Назад към началната страница
+        </a>
+
+        <div class="help-section">
+            <h2><i class="fas fa-question-circle"></i> Добре дошли в Офис Инструменти</h2>
+            <p>
+                Офис Инструменти е набор от уеб-базирани инструменти, създадени да улеснят ежедневната работа в офиса. 
+                Всички инструменти работят изцяло в браузъра - файловете Ви остават на Вашия компютър и не се изпращат към никакъв сървър.
+            </p>
+            <div class="tip-box">
+                <strong><i class="fas fa-shield-alt"></i> Сигурност и поверителност</strong>
+                Всички PDF файлове се обработват локално във Вашия браузър. Нищо не се качва в интернет. Това означава, че можете безопасно да работите с чувствителни документи.
+            </div>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-file-pdf"></i> PDF Инструменти</h2>
+            <p>Пълен набор от инструменти за работа с PDF файлове, разделени в 5 категории:</p>
+
+            <h3>PDF Редактор</h3>
+            <p>Основният инструмент за работа с PDF файлове. Позволява:</p>
+            <ul>
+                <li><strong>Качване</strong> - Плъзнете файл или кликнете за избор</li>
+                <li><strong>Преглед</strong> - Виждате миниатюри на всички страници</li>
+                <li><strong>Избор на страници</strong> - Кликнете на страница за избор/отмяна</li>
+                <li><strong>Изтриване</strong> - След избор на страници, натиснете "Изтрий избраните"</li>
+                <li><strong>Пренареждане</strong> - Използвайте бутона "Пренареди" и плъзгайте страници</li>
+                <li><strong>Сливане</strong> - Обединете текущия PDF с други файлове</li>
+                <li><strong>Компресиране</strong> - Намалете размера на файла</li>
+            </ul>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4><i class="fas fa-mouse"></i> Избор на страници</h4>
+                    <p>Кликнете на миниатюра за избор. Синя рамка показва избраните страници.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><i class="fas fa-arrows-alt"></i> Пренареждане</h4>
+                    <p>Активирайте режим "Пренареди" и плъзгайте страници на нови позиции.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><i class="fas fa-layer-group"></i> Сливане</h4>
+                    <p>Качете няколко PDF файла и ги обединете в един документ.</p>
+                </div>
+                <div class="feature-card">
+                    <h4><i class="fas fa-compress"></i> Компресиране</h4>
+                    <p>Изберете ниво на компресия: Леко, Средно, Високо или Максимално.</p>
+                </div>
+            </div>
+
+            <h3>Групово компресиране</h3>
+            <p>Компресирайте множество PDF файлове наведнъж:</p>
+            <ol>
+                <li>Качете множество PDF файлове</li>
+                <li>Изберете ниво на компресия за всички</li>
+                <li>Натиснете "Започни компресиране"</li>
+                <li>Изтеглете всички като ZIP архив</li>
+            </ol>
+            <div class="tip-box">
+                <strong><i class="fas fa-lightbulb"></i> Съвет:</strong>
+                За документи със снимки използвайте "Средно" или "Високо". За документи само с текст "Леко" е достатъчно.
+            </div>
+
+            <h3>Групово добавяне</h3>
+            <p>Добавете един PDF (например корица или футър) към началото или края на множество PDF файлове:</p>
+            <ol>
+                <li>Изберете PDF за добавяне (общ файл)</li>
+                <li>Качете целевите PDF файлове</li>
+                <li>Изберете позиция: начало или край</li>
+                <li>Изтеглете обработените файлове като ZIP</li>
+            </ol>
+
+            <h3>Извличане на страници</h3>
+            <p>Извлечете конкретни страници от PDF:</p>
+            <ul>
+                <li>Кликнете на страниците, които искате да извлечете</li>
+                <li>Или използвайте диапазон: "1-3, 5, 7-9"</li>
+                <li>Изтеглете избраните страници като нов PDF</li>
+            </ul>
+
+            <h3>Разделяне на PDF</h3>
+            <p>Разделете PDF на отделни файлове - по една страница на файл:</p>
+            <ol>
+                <li>Качете PDF файл</li>
+                <li>Прегледайте страниците</li>
+                <li>Изберете дали искате ZIP или отделни файлове</li>
+                <li>Натиснете "Раздели и изтегли"</li>
+            </ol>
+            <div class="warning-box">
+                <strong><i class="fas fa-exclamation-triangle"></i> Внимание:</strong>
+                При големи PDF файлове процесът може да отнеме време. Индикаторът за прогрес ще показва напредъка.
+            </div>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-euro-sign"></i> Валутен конвертор BGN/EUR</h2>
+            <p>Конвертор между български лева и евро с фиксиран курс за влизането на България в Еврозоната.</p>
+            
+            <h3>Как да използвате:</h3>
+            <ol>
+                <li>Въведете сума в едно от двете полета</li>
+                <li>Конвертирането се извършва автоматично</li>
+                <li>Използвайте бутона <i class="fas fa-exchange-alt"></i> за размяна на посоките</li>
+                <li>Бързи бутони за типични суми: 1, 5, 10, 20, 50, 100</li>
+            </ol>
+
+            <div class="tip-box">
+                <strong><i class="fas fa-info-circle"></i> Фиксиран курс:</strong>
+                Курсът 1 EUR = 1.95583 BGN е официално потвърден за България.
+            </div>
+
+            <h3>Референтна таблица</h3>
+            <p>В долната част на страницата има таблица с често срещани стойности за бърза справка.</p>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-calendar-alt"></i> Калкулатор за дати</h2>
+            <p>Инструмент за изчисляване на крайни срокове и обезпечения за обществени поръчки.</p>
+
+            <h3>Изчисляване на крайни срокове</h3>
+            <p>Изчислява датата, 18-20 работни дни преди избраната дата (в зависимост от деня от седмицата):</p>
+            <ol>
+                <li>Изберете крайна дата (обявление)</li>
+                <li>Системата автоматично изчислява датата за подаване</li>
+                <li>Отчитат се почивни дни и празници</li>
+                <li>Цветово кодиране показва статуса:
+                    <ul>
+                        <li><strong style="color: #22c55e;">Зелен</strong> - Срокът е предстоящ</li>
+                        <li><strong style="color: #f59e0b;">Оранжев</strong> - Срокът е ДНЕС</li>
+                        <li><strong style="color: #ef4444;">Червен</strong> - Срокът е изтекъл</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Калкулатор за обезпечения</h3>
+            <p>Изчислява необходимите обезпечения за участие в обществена поръчка:</p>
+            <ul>
+                <li><strong>Оферта (1%)</strong> - 1% от прогнозната стойност</li>
+                <li><strong>Гаранция (5%)</strong> - 5% закръглена по правилата:
+                    <ul>
+                        <li>Над 999 лв - закръгляне до 100 лв</li>
+                        <li>200-999 лв - закръгляне до 10 лв</li>
+                        <li>Под 200 лв - без закръгляне</li>
+                    </ul>
+                </li>
+                <li><strong>5% точна</strong> - Точно 5% без закръгляне за справка</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong><i class="fas fa-exclamation-circle"></i> Проверка на гаранцията:</strong>
+                Ако изчислената гаранция надвишава 5%, полето става червено. Уверете се, че сумата е правилна!
+            </div>
+
+            <h3>База данни с празници</h3>
+            <p>Системата включва база данни с официални български празници за 2026 година. Празниците се показват в долната част на страницата с цветово кодиране:</p>
+            <ul>
+                <li><strong style="color: #3b82f6;">Син кант</strong> - Празник пада в делничен ден</li>
+                <li><strong style="color: #ef4444;">Червен кант</strong> - Празник пада в уикенд</li>
+            </ul>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-mobile-alt"></i> Мобилна версия</h2>
+            <p>Всички инструменти са оптимизирани за мобилни устройства:</p>
+            <ul>
+                <li>Адаптивен дизайн - работи на телефони и таблети</li>
+                <li>Опростена навигация на малки екрани</li>
+                <li>Само икони в навигацията при много малки екрани</li>
+                <li>Оптимизирани контроли за тъч</li>
+            </ul>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-keyboard"></i> Клавишни комбинации и съвети</h2>
+            
+            <h3>PDF Редактор</h3>
+            <ul>
+                <li><strong>Ctrl + Click</strong> - Множествен избор на страници</li>
+                <li><strong>Избери всички / Отмени всички</strong> - Бързи бутони за масово управление</li>
+                <li><strong>Drag & Drop</strong> - Плъзнете файлове директно върху зоната за качване</li>
+            </ul>
+
+            <h3>Общи съвети</h3>
+            <ul>
+                <li>За най-добри резултати използвайте Chrome или Edge</li>
+                <li>При големи PDF файлове (над 50 MB) процесът може да отнеме време</li>
+                <li>Всички файлове остават във Вашия браузър - не се изпращат никъде</li>
+                <li>Можете да работите без интернет след първоначално зареждане на страницата</li>
+            </ul>
+
+            <div class="tip-box">
+                <strong><i class="fas fa-rocket"></i> Производителност:</strong>
+                За по-бърза работа с много PDF файлове използвайте инструментите за групова обработка (Групово компресиране или Групово добавяне).
+            </div>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-life-ring"></i> Често задавани въпроси</h2>
+            
+            <h3>Защо не виждам миниатюрите на PDF страниците?</h3>
+            <p>Уверете се, че използвате съвременен браузър (Chrome, Edge, Firefox, Safari). Опреснете страницата и опитайте отново. Ако проблемът продължава, проверете конзолата за грешки (F12).</p>
+
+            <h3>Има ли ограничение за размера на файловете?</h3>
+            <p>Няма твърдо ограничение, но много големи файлове (над 100 MB) могат да работят бавно в зависимост от компютъра Ви. При проблеми опитайте с по-малки файлове.</p>
+
+            <h3>Могат ли файловете ми да бъдат видени от други?</h3>
+            <p>НЕ. Всички файлове се обработват локално във Вашия браузър. Нищо не се изпраща към сървър или интернет.</p>
+
+            <h3>Как да актуализирам базата данни с празници?</h3>
+            <p>Редактирайте файла <code>holidays.json</code> като добавите нови дати във формат <code>{"date": "YYYY-MM-DD", "name": "Име на празника"}</code>.</p>
+
+            <h3>Работи ли офлайн?</h3>
+            <p>След първоначално зареждане на страницата и нейните библиотеки, можете да работите без интернет. Обаче за актуализации или използване на нов компютър ще ви трябва интернет.</p>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-code"></i> За разработчици</h2>
+            <p>Офис Инструменти е разработен с:</p>
+            <ul>
+                <li><strong>Vanilla JavaScript</strong> - Без framework зависимости</li>
+                <li><strong>HTML5 & CSS3</strong> - Модерни уеб стандарти</li>
+                <li><strong>PDF.js</strong> - Рендиране на PDF от Mozilla</li>
+                <li><strong>pdf-lib</strong> - Манипулация на PDF документи</li>
+                <li><strong>JSZip</strong> - Създаване на ZIP архиви</li>
+                <li><strong>Font Awesome</strong> - Икони</li>
+            </ul>
+            
+            <p>Проектът е с отворен код и може да бъде модифициран според нуждите на организацията.</p>
+            
+            <div class="tip-box">
+                <strong><i class="fas fa-github"></i> GitHub:</strong>
+                Документация и код са достъпни в README.md файла. Можете да допринесете или да докладвате проблеми чрез repository.
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Назад към началната страница
+        </a>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Офис Инструменти. Създадено за продуктивност.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
