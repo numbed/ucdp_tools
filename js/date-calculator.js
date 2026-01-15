@@ -94,7 +94,6 @@ function calculateDate() {
 		document.querySelector('#result-day').textContent = '';
 		document.querySelector('#input-day').textContent = `(${inputDay})`;
 		if (resultBox) resultBox.classList.add('error');
-		document.body.classList.add('result-passed');
 		return;
 	}
 	
@@ -135,12 +134,41 @@ function calculateDate() {
 	document.querySelector('#result-day').textContent = `(${resultDay})`;
 	document.querySelector('#input-day').textContent = `(${inputDay})`;
 
-	// Проверка дали резултатната дата е минала и задаване на цвета на фона според това
+	// Проверка дали резултатната дата е минала, днес или предстояща
 	const now = new Date();
-	if (result < now) {
-		document.body.classList.add('result-passed');
-	} else {
-		document.body.classList.remove('result-passed');
+	now.setHours(0, 0, 0, 0);
+	const resultDate = new Date(result);
+	resultDate.setHours(0, 0, 0, 0);
+	
+	if (resultBox) {
+		resultBox.classList.remove('result-passed', 'result-today');
+		
+		if (resultDate.getTime() === now.getTime()) {
+			resultBox.classList.add('result-today');
+			let statusMsg = document.createElement('div');
+			statusMsg.className = 'result-status';
+			statusMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Крайният срок е ДНЕС!';
+			if (!resultBox.querySelector('.result-status')) {
+				resultBox.appendChild(statusMsg);
+			} else {
+				resultBox.querySelector('.result-status').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Крайният срок е ДНЕС!';
+			}
+		} else if (resultDate < now) {
+			resultBox.classList.add('result-passed');
+			let statusMsg = document.createElement('div');
+			statusMsg.className = 'result-status';
+			statusMsg.innerHTML = '<i class="fas fa-times-circle"></i> Срокът е изтекъл';
+			if (!resultBox.querySelector('.result-status')) {
+				resultBox.appendChild(statusMsg);
+			} else {
+				resultBox.querySelector('.result-status').innerHTML = '<i class="fas fa-times-circle"></i> Срокът е изтекъл';
+			}
+		} else {
+			const existingStatus = resultBox.querySelector('.result-status');
+			if (existingStatus) {
+				existingStatus.remove();
+			}
+		}
 	}
 }
 

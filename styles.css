@@ -1814,6 +1814,51 @@ footer {
     font-weight: 500;
 }
 
+.calc-result.result-passed {
+    background: var(--danger);
+    color: white;
+}
+
+.calc-result.result-passed .result-label,
+.calc-result.result-passed .result-day {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.calc-result.result-passed .result-value {
+    color: white;
+}
+
+.calc-result.result-today {
+    background: var(--warning);
+    color: white;
+    border: 2px solid #d97706;
+}
+
+.calc-result.result-today .result-label,
+.calc-result.result-today .result-day {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.calc-result.result-today .result-value {
+    color: white;
+}
+
+.result-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.result-status i {
+    font-size: 1.1rem;
+}
+
 /* Money Results */
 .money-results {
     display: flex;
