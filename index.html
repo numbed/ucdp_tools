@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Office Tools - PDF Editor</title>
+    <title>Офис Инструменти - PDF Редактор</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -11,14 +11,13 @@
     <header>
         <div class="container">
             <div class="logo">
-                <img src="logo.png" alt="Office Tools">
-                <span data-i18n="officeTools">Office Tools</span>
+                <img src="logo.png" alt="Офис Инструменти">
+                <span>Офис Инструменти</span>
             </div>
             <nav>
-                <a href="index.html" class="nav-link active"><i class="fas fa-file-pdf"></i> <span data-i18n="pdfTools">PDF Tools</span></a>
-                <a href="currency.html" class="nav-link"><i class="fas fa-euro-sign"></i> <span data-i18n="bgnEur">BGN/EUR</span></a>
-                <a href="date-calculator.html" class="nav-link"><i class="fas fa-calendar-alt"></i> <span data-i18n="dateCalc">Date Calculator</span></a>
-                <button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">BG</button>
+                <a href="index.html" class="nav-link active"><i class="fas fa-file-pdf"></i> <span>PDF Инструменти</span></a>
+                <a href="currency.html" class="nav-link"><i class="fas fa-euro-sign"></i> <span>лв/EUR</span></a>
+                <a href="date-calculator.html" class="nav-link"><i class="fas fa-calendar-alt"></i> <span>Калкулатор за дати</span></a>
             </nav>
         </div>
     </header>
@@ -28,11 +27,11 @@
         <div class="container">
             <!-- PDF Tools Subtabs -->
             <div class="pdf-subtabs">
-                <button class="subtab active" data-subtool="editor"><i class="fas fa-edit"></i> <span data-i18n="pdfEditor">PDF Editor</span></button>
-                <button class="subtab" data-subtool="batch"><i class="fas fa-compress-arrows-alt"></i> <span data-i18n="batchCompress">Batch Compress</span></button>
-                <button class="subtab" data-subtool="append"><i class="fas fa-plus-circle"></i> <span data-i18n="batchAppend">Batch Append</span></button>
-                <button class="subtab" data-subtool="extract"><i class="fas fa-file-export"></i> <span data-i18n="extractPages">Extract Pages</span></button>
-                <button class="subtab" data-subtool="split"><i class="fas fa-cut"></i> <span data-i18n="splitPdf">Split PDF</span></button>
+                <button class="subtab active" data-subtool="editor"><i class="fas fa-edit"></i> <span >PDF Редактор</span></button>
+                <button class="subtab" data-subtool="batch"><i class="fas fa-compress-arrows-alt"></i> <span >Групово компресиране</span></button>
+                <button class="subtab" data-subtool="append"><i class="fas fa-plus-circle"></i> <span >Групово добавяне</span></button>
+                <button class="subtab" data-subtool="extract"><i class="fas fa-file-export"></i> <span >Извличане на страници</span></button>
+                <button class="subtab" data-subtool="split"><i class="fas fa-cut"></i> <span >Разделяне на PDF</span></button>
             </div>
         </div>
 
@@ -43,10 +42,10 @@
         <section id="upload-section" class="upload-section">
             <div class="upload-box" id="upload-box">
                 <i class="fas fa-cloud-upload-alt"></i>
-                <h2 data-i18n="uploadPdfFile">Upload PDF File</h2>
-                <p data-i18n="dragDropPdf">Drag & drop your PDF here or click to browse</p>
+                <h2 >Качване на PDF файл</h2>
+                <p >Плъзнете PDF тук или кликнете за избор</p>
                 <button class="btn btn-primary" id="select-btn">
-                    <i class="fas fa-folder-open"></i> <span data-i18n="selectFile">Select File</span>
+                    <i class="fas fa-folder-open"></i> <span >Избери файл</span>
                 </button>
                 <input type="file" id="pdf-input" accept=".pdf" hidden>
             </div>
@@ -62,59 +61,59 @@
                 </div>
                 <div class="editor-actions">
                     <button class="btn btn-info" id="merge-btn">
-                        <i class="fas fa-object-group"></i> <span data-i18n="mergeFiles">Merge Files</span>
+                        <i class="fas fa-object-group"></i> <span >Обедини файлове</span>
                     </button>
                     <div class="dropdown">
                         <button class="btn btn-success" id="compress-btn">
-                            <i class="fas fa-compress-alt"></i> <span data-i18n="compress">Compress</span> <i class="fas fa-caret-down"></i>
+                            <i class="fas fa-compress-alt"></i> <span >Компресирай</span> <i class="fas fa-caret-down"></i>
                         </button>
                         <div class="dropdown-menu" id="compress-menu">
                             <button class="dropdown-item" data-quality="light">
-                                <i class="fas fa-feather"></i> <span data-i18n="light">Light</span>
-                                <span data-i18n="lightDesc">Metadata only</span>
+                                <i class="fas fa-feather"></i> <span >Лек</span>
+                                <span >Само метаданни</span>
                             </button>
                             <button class="dropdown-item" data-quality="medium">
-                                <i class="fas fa-balance-scale"></i> <span data-i18n="medium">Medium</span>
-                                <span data-i18n="mediumDesc">150 DPI</span>
+                                <i class="fas fa-balance-scale"></i> <span >Среден</span>
+                                <span >150 DPI</span>
                             </button>
                             <button class="dropdown-item" data-quality="high">
-                                <i class="fas fa-compress-arrows-alt"></i> <span data-i18n="high">High</span>
-                                <span data-i18n="highDesc">100 DPI</span>
+                                <i class="fas fa-compress-arrows-alt"></i> <span >Висок</span>
+                                <span >100 DPI</span>
                             </button>
                             <button class="dropdown-item" data-quality="maximum">
-                                <i class="fas fa-file-archive"></i> <span data-i18n="maximum">Maximum</span>
-                                <span data-i18n="maximumDesc">72 DPI</span>
+                                <i class="fas fa-file-archive"></i> <span >Максимален</span>
+                                <span >72 DPI</span>
                             </button>
                         </div>
                     </div>
                     <button class="btn btn-primary" id="download-btn">
-                        <i class="fas fa-download"></i> <span data-i18n="download">Download</span>
+                        <i class="fas fa-download"></i> <span >Изтегли</span>
                     </button>
                     <button class="btn" id="close-btn">
-                        <i class="fas fa-times"></i> <span data-i18n="close">Close</span>
+                        <i class="fas fa-times"></i> <span >Затвори</span>
                     </button>
                 </div>
             </div>
 
             <div class="editor-toolbar">
                 <button class="btn" id="select-all-btn">
-                    <i class="fas fa-check-double"></i> <span data-i18n="selectAll">Select All</span>
+                    <i class="fas fa-check-double"></i> <span >Избери всички</span>
                 </button>
                 <button class="btn" id="deselect-all-btn">
-                    <i class="fas fa-square"></i> <span data-i18n="deselectAll">Deselect All</span>
+                    <i class="fas fa-square"></i> <span >Размаркирай всички</span>
                 </button>
                 <button class="btn btn-danger" id="delete-btn" disabled>
-                    <i class="fas fa-trash"></i> <span data-i18n="deleteSelected">Delete Selected</span> (<span id="selected-count">0</span>)
+                    <i class="fas fa-trash"></i> <span >Изтрий избраните</span> (<span id="selected-count">0</span>)
                 </button>
                 <div class="toolbar-divider"></div>
                 <button class="btn btn-reorder" id="reorder-btn">
-                    <i class="fas fa-arrows-alt"></i> <span data-i18n="reorderMode">Reorder Mode</span>
+                    <i class="fas fa-arrows-alt"></i> <span >Режим на пренареждане</span>
                 </button>
                 <button class="btn btn-primary" id="apply-order-btn" style="display: none;">
-                    <i class="fas fa-check"></i> <span data-i18n="applyOrder">Apply Order</span>
+                    <i class="fas fa-check"></i> <span >Приложи</span>
                 </button>
                 <button class="btn" id="cancel-order-btn" style="display: none;">
-                    <i class="fas fa-times"></i> <span data-i18n="cancel">Cancel</span>
+                    <i class="fas fa-times"></i> <span >Отказ</span>
                 </button>
             </div>
 
@@ -135,35 +134,35 @@
         <div class="container">
             <div class="batch-card">
                 <div class="batch-header">
-                    <h2><i class="fas fa-compress-arrows-alt"></i> <span data-i18n="batchPdfCompression">Batch PDF Compression</span></h2>
-                    <p data-i18n="compressMultiple">Compress multiple PDF files at once</p>
+                    <h2><i class="fas fa-compress-arrows-alt"></i> <span >Групово компресиране на PDF</span></h2>
+                    <p >Компресирайте множество PDF файлове наведнъж</p>
                 </div>
 
                 <div class="batch-upload" id="batch-upload">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <h3 data-i18n="dropPdfFilesHere">Drop PDF files here</h3>
-                    <p data-i18n="clickToSelectMultiple">or click to select multiple files</p>
+                    <h3 >Пуснете PDF файлове тук</h3>
+                    <p >или кликнете за избор на множество файлове</p>
                 </div>
                 <input type="file" id="batch-input" accept=".pdf" multiple hidden>
 
                 <div class="batch-options">
-                    <label data-i18n="compressionLevel">Compression Level:</label>
+                    <label >Ниво на компресия:</label>
                     <div class="compression-options">
                         <label class="radio-option">
                             <input type="radio" name="batch-quality" value="light" checked>
-                            <span><i class="fas fa-feather"></i> <span data-i18n="light">Light</span></span>
+                            <span><i class="fas fa-feather"></i> <span >Лек</span></span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="batch-quality" value="medium">
-                            <span><i class="fas fa-balance-scale"></i> <span data-i18n="medium">Medium</span> (150 DPI)</span>
+                            <span><i class="fas fa-balance-scale"></i> <span >Среден</span> (150 DPI)</span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="batch-quality" value="high">
-                            <span><i class="fas fa-compress-arrows-alt"></i> <span data-i18n="high">High</span> (100 DPI)</span>
+                            <span><i class="fas fa-compress-arrows-alt"></i> <span >Висок</span> (100 DPI)</span>
                         </label>
                         <label class="radio-option">
                             <input type="radio" name="batch-quality" value="maximum">
-                            <span><i class="fas fa-file-archive"></i> <span data-i18n="maximum">Maximum</span> (72 DPI)</span>
+                            <span><i class="fas fa-file-archive"></i> <span >Максимален</span> (72 DPI)</span>
                         </label>
                     </div>
                 </div>
@@ -172,13 +171,13 @@
 
                 <div class="batch-actions" id="batch-actions" style="display: none;">
                     <button class="btn" id="clear-batch">
-                        <i class="fas fa-trash"></i> <span data-i18n="clearAll">Clear All</span>
+                        <i class="fas fa-trash"></i> <span >Изчисти всички</span>
                     </button>
                     <button class="btn btn-success" id="start-batch">
-                        <i class="fas fa-play"></i> <span data-i18n="compressAll">Compress All</span>
+                        <i class="fas fa-play"></i> <span >Компресирай всички</span>
                     </button>
                     <button class="btn btn-primary" id="download-all-batch" style="display: none;">
-                        <i class="fas fa-download"></i> <span data-i18n="downloadAll">Download All</span>
+                        <i class="fas fa-download"></i> <span >Изтегли всички</span>
                     </button>
                 </div>
 
@@ -197,17 +196,17 @@
         <div class="container">
             <div class="batch-card">
                 <div class="batch-header">
-                    <h2><i class="fas fa-plus-circle"></i> <span data-i18n="batchAppendPdf">Batch Append PDF</span></h2>
-                    <p data-i18n="appendOneToMultiple">Append one PDF to the end of multiple files</p>
+                    <h2><i class="fas fa-plus-circle"></i> <span >Групово добавяне на PDF</span></h2>
+                    <p >Добавете един PDF в края на множество файлове</p>
                 </div>
 
                 <div class="append-grid">
                     <div class="append-column">
-                        <h4><i class="fas fa-file-pdf"></i> <span data-i18n="fileToAppend">File to Append</span></h4>
-                        <p class="append-help" data-i18n="fileToAppendHelp">This file will be added to the end of all target files</p>
+                        <h4><i class="fas fa-file-pdf"></i> <span >Файл за добавяне</span></h4>
+                        <p class="append-help" >Този файл ще бъде добавен в края на всички целеви файлове</p>
                         <div class="append-upload" id="append-source-upload">
                             <i class="fas fa-file-import"></i>
-                            <span id="append-source-name" data-i18n="clickOrDropToSelect">Click or drop to select</span>
+                            <span id="append-source-name" >Кликнете или пуснете за избор</span>
                         </div>
                         <input type="file" id="append-source-input" accept=".pdf" hidden>
                     </div>
@@ -217,11 +216,11 @@
                     </div>
                     
                     <div class="append-column">
-                        <h4><i class="fas fa-copy"></i> <span data-i18n="targetFiles">Target Files</span></h4>
-                        <p class="append-help" data-i18n="targetFilesHelp">Files that will have the source appended</p>
+                        <h4><i class="fas fa-copy"></i> <span >Целеви файлове</span></h4>
+                        <p class="append-help" >Файлове, към които ще бъде добавен източникът</p>
                         <div class="append-upload" id="append-target-upload">
                             <i class="fas fa-folder-open"></i>
-                            <span data-i18n="clickOrDropMultiple">Click or drop multiple PDFs</span>
+                            <span >Кликнете или пуснете множество PDF файлове</span>
                         </div>
                         <input type="file" id="append-target-input" accept=".pdf" multiple hidden>
                     </div>
@@ -231,13 +230,13 @@
 
                 <div class="batch-actions" id="append-actions" style="display: none;">
                     <button class="btn" id="clear-append">
-                        <i class="fas fa-trash"></i> <span data-i18n="clearAll">Clear All</span>
+                        <i class="fas fa-trash"></i> <span >Изчисти всички</span>
                     </button>
                     <button class="btn btn-primary" id="start-append">
-                        <i class="fas fa-play"></i> <span data-i18n="appendToAll">Append to All</span>
+                        <i class="fas fa-play"></i> <span >Добави към всички</span>
                     </button>
                     <button class="btn btn-success" id="download-all-append" style="display: none;">
-                        <i class="fas fa-download"></i> <span data-i18n="downloadAll">Download All</span>
+                        <i class="fas fa-download"></i> <span >Изтегли всички</span>
                     </button>
                 </div>
 
@@ -256,14 +255,14 @@
         <div class="container">
             <div class="batch-card">
                 <div class="batch-header">
-                    <h2><i class="fas fa-file-export"></i> <span data-i18n="extractPdfPages">Extract PDF Pages</span></h2>
-                    <p data-i18n="extractDescription">Select pages from a PDF file to extract and download</p>
+                    <h2><i class="fas fa-file-export"></i> <span >Извличане на PDF страници</span></h2>
+                    <p >Изберете страници от PDF файл за извличане и изтегляне</p>
                 </div>
 
                 <div class="batch-upload" id="extract-upload">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <h3 data-i18n="dropPdfFileHere">Drop PDF file here</h3>
-                    <p data-i18n="clickToSelectFile">or click to select a file</p>
+                    <h3 >Пуснете PDF файл тук</h3>
+                    <p >или кликнете за избор на файл</p>
                 </div>
                 <input type="file" id="extract-input" accept=".pdf" hidden>
 
@@ -273,22 +272,22 @@
                         <span id="extract-file-name">document.pdf</span>
                         <span class="file-size" id="extract-file-size">(0 MB)</span>
                         <button class="btn btn-sm" id="extract-close-btn">
-                            <i class="fas fa-times"></i> <span data-i18n="close">Close</span>
+                            <i class="fas fa-times"></i> <span >Затвори</span>
                         </button>
                     </div>
 
                     <div class="extract-toolbar">
                         <button class="btn" id="extract-select-all">
-                            <i class="fas fa-check-double"></i> <span data-i18n="selectAll">Select All</span>
+                            <i class="fas fa-check-double"></i> <span >Избери всички</span>
                         </button>
                         <button class="btn" id="extract-deselect-all">
-                            <i class="fas fa-square"></i> <span data-i18n="deselectAll">Deselect All</span>
+                            <i class="fas fa-square"></i> <span >Размаркирай всички</span>
                         </button>
                         <div class="extract-range-input">
-                            <label data-i18n="pageRange">Page Range:</label>
+                            <label >Диапазон на страници:</label>
                             <input type="text" id="extract-range" placeholder="e.g., 1-3, 5, 7-9">
                             <button class="btn btn-sm" id="apply-range-btn">
-                                <i class="fas fa-check"></i> <span data-i18n="apply">Apply</span>
+                                <i class="fas fa-check"></i> <span >Приложи</span>
                             </button>
                         </div>
                     </div>
@@ -298,9 +297,9 @@
                     </div>
 
                     <div class="extract-actions">
-                        <span id="extract-selected-count">0 <span data-i18n="pagesSelected">pages selected</span></span>
+                        <span id="extract-selected-count">0 <span >страници избрани</span></span>
                         <button class="btn btn-primary" id="extract-download-btn" disabled>
-                            <i class="fas fa-download"></i> <span data-i18n="extractAndDownload">Extract & Download</span>
+                            <i class="fas fa-download"></i> <span >Извлечи и изтегли</span>
                         </button>
                     </div>
                 </div>
@@ -313,14 +312,14 @@
         <div class="container">
             <div class="batch-card">
                 <div class="batch-header">
-                    <h2><i class="fas fa-cut"></i> <span data-i18n="splitPdfPages">Split PDF into Pages</span></h2>
-                    <p data-i18n="splitDescription">Split a PDF file into individual pages and download them</p>
+                    <h2><i class="fas fa-cut"></i> <span >Разделяне на PDF на страници</span></h2>
+                    <p >Разделете PDF файл на отделни страници и ги изтеглете</p>
                 </div>
 
                 <div class="batch-upload" id="split-upload">
                     <i class="fas fa-cloud-upload-alt"></i>
-                    <h3 data-i18n="dropPdfFileHere">Drop PDF file here</h3>
-                    <p data-i18n="clickToSelectFile">or click to select a file</p>
+                    <h3 >Пуснете PDF файл тук</h3>
+                    <p >или кликнете за избор на файл</p>
                 </div>
                 <input type="file" id="split-input" accept=".pdf" hidden>
 
@@ -331,7 +330,7 @@
                         <span class="file-size" id="split-file-size">(0 MB)</span>
                         <span id="split-page-count" class="split-page-badge">0 pages</span>
                         <button class="btn btn-sm" id="split-close-btn">
-                            <i class="fas fa-times"></i> <span data-i18n="close">Close</span>
+                            <i class="fas fa-times"></i> <span >Затвори</span>
                         </button>
                     </div>
 
@@ -343,11 +342,11 @@
                         <div class="split-options">
                             <label class="checkbox-option">
                                 <input type="checkbox" id="split-zip-option" checked>
-                                <span data-i18n="downloadAsZip">Download as ZIP</span>
+                                <span >Изтегли като ZIP</span>
                             </label>
                         </div>
                         <button class="btn btn-primary" id="split-download-btn">
-                            <i class="fas fa-download"></i> <span data-i18n="splitAndDownload">Split & Download</span>
+                            <i class="fas fa-download"></i> <span >Раздели и изтегли</span>
                         </button>
                     </div>
                 </div>
@@ -365,7 +364,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Office Tools. Built for productivity.</p>
+            <p>&copy; 2026 Офис Инструменти. Създадено за продуктивност.</p>
         </div>
     </footer>
 
@@ -373,26 +372,26 @@
     <div id="merge-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fas fa-object-group"></i> <span data-i18n="mergePdfFiles">Merge PDF Files</span></h3>
+                <h3><i class="fas fa-object-group"></i> <span >Обединяване на PDF файлове</span></h3>
                 <button class="btn-close" id="close-merge-modal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="merge-info" data-i18n="mergeInfo">Add PDF files to merge. Drag to reorder. Files will be combined in the order shown.</p>
+                <p class="merge-info" >Добавете PDF файлове за обединяване. Плъзнете за пренареждане. Файловете ще бъдат комбинирани в показания ред.</p>
                 <div class="merge-dropzone" id="merge-dropzone">
                     <i class="fas fa-plus-circle"></i>
-                    <span data-i18n="dropPdfsHere">Drop PDFs here or click to add</span>
+                    <span >Пуснете PDF файлове тук или кликнете за добавяне</span>
                     <input type="file" id="merge-input" accept=".pdf" multiple hidden>
                 </div>
                 <div class="merge-file-list" id="merge-file-list"></div>
             </div>
             <div class="modal-footer">
                 <button class="btn" id="clear-merge-list">
-                    <i class="fas fa-trash"></i> <span data-i18n="clearAll">Clear All</span>
+                    <i class="fas fa-trash"></i> <span >Изчисти всички</span>
                 </button>
                 <button class="btn btn-primary" id="do-merge" disabled>
-                    <i class="fas fa-object-group"></i> <span data-i18n="mergePdfs">Merge PDFs</span>
+                    <i class="fas fa-object-group"></i> <span >Обедини PDF файлове</span>
                 </button>
             </div>
         </div>
@@ -406,8 +405,7 @@
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     
-    <!-- Application Modules (order matters - translations and main.js must be first) -->
-    <script src="js/translations.js"></script>
+    <!-- Application Modules (order matters - main.js must be first) -->
     <script src="js/main.js"></script>
     <script src="js/pdf-editor.js"></script>
     <script src="js/pdf-compress.js"></script>

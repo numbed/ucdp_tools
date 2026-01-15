@@ -54,9 +54,6 @@ function init() {
     // Setup navigation
     setupNavigation();
     
-    // Apply translations
-    updateAllTranslations();
-    
     // Only setup PDF-related events if on PDF tools page
     if (uploadBox && pdfInput) {
         // File upload events
