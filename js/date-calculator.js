@@ -191,7 +191,7 @@ function calculateMoney() {
 	}
 
 	document.querySelector('#bidBGN').textContent = bidBGN;
-	document.querySelector('#guaranteeBGN').textContent = guaranteeBGN;
+	document.querySelector('#guaranteeBGN').textContent = guaranteeBGN.toFixed(2);
 	document.querySelector('#fivePBGN').textContent = fivePBGN.toFixed(2);
 	percDiff();
 }
@@ -199,7 +199,7 @@ function calculateMoney() {
 function percDiff() {
 	let priceBGN = parseFloat(document.querySelector('#priceBGN').value);
 	let g2 = parseInt(document.querySelector('#guaranteeBGN').textContent);
-	let percDiffBGN = ((g2 / priceBGN) * 100).toFixed(1);
+	let percDiffBGN = ((g2 / priceBGN) * 100).toFixed(3);
 	document.querySelector('#percentageBGN').innerHTML = ' (' + percDiffBGN + '%)';
 	if (percDiffBGN > 5) {
 		document.querySelector('#guaranteeBGN').style.backgroundColor = '#ff6b6b';
