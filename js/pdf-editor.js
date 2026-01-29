@@ -15,8 +15,8 @@ async function loadPDF(file) {
         pdfBytes = arrayBuffer;
         currentFileName = file.name;
         
-        // Load with PDF.js for rendering
-        const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+        // Load with PDF.js for rendering (pass a copy since PDF.js may transfer to worker)
+        const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer.slice(0) });
         pdfDoc = await loadingTask.promise;
         
         // Update UI
@@ -52,7 +52,9 @@ async function renderAllPages() {
 }
 
 async function renderThumbnail(pageNum) {
-    const page = await pdfDoc.getPage(pageNum);
+    // In reorder mode, render the page from pageOrder; otherwise render in sequence
+    const actualPageNum = reorderMode ? pageOrder[pageNum - 1] : pageNum;
+    const page = await pdfDoc.getPage(actualPageNum);
     const viewport = page.getViewport({ scale: 0.3 });
     
     const canvas = document.createElement('canvas');
@@ -65,12 +67,9 @@ async function renderThumbnail(pageNum) {
         viewport: viewport
     }).promise;
     
-    // Get the actual page number (for reorder mode)
-    const displayNum = reorderMode ? pageOrder[pageNum - 1] : pageNum;
-    
     const pageCard = document.createElement('div');
     pageCard.className = 'page-card';
-    pageCard.dataset.page = pageNum;
+    pageCard.dataset.page = actualPageNum;
     pageCard.dataset.index = pageNum - 1;
     
     if (reorderMode) {
@@ -84,7 +83,7 @@ async function renderThumbnail(pageNum) {
     
     const pageNumberDiv = document.createElement('div');
     pageNumberDiv.className = 'page-number';
-    pageNumberDiv.textContent = `Page ${displayNum}`;
+    pageNumberDiv.textContent = `Page ${actualPageNum}`;
     
     pageCard.appendChild(thumbnailDiv);
     pageCard.appendChild(pageNumberDiv);
@@ -160,10 +159,14 @@ async function deleteSelectedPages() {
         
         // Save the modified PDF
         const newPdfBytes = await pdfLibDoc.save();
-        pdfBytes = newPdfBytes.buffer;
+        // Create a new ArrayBuffer from the Uint8Array
+        const buffer = new ArrayBuffer(newPdfBytes.length);
+        const view = new Uint8Array(buffer);
+        view.set(newPdfBytes);
+        pdfBytes = buffer;
         
-        // Reload with PDF.js
-        const loadingTask = pdfjsLib.getDocument({ data: pdfBytes });
+        // Reload with PDF.js (pass a copy since PDF.js may transfer to worker)
+        const loadingTask = pdfjsLib.getDocument({ data: buffer.slice(0) });
         pdfDoc = await loadingTask.promise;
         
         // Update UI

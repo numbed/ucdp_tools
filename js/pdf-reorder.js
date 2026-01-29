@@ -78,10 +78,14 @@ async function applyNewOrder() {
         
         // Save
         const newPdfBytes = await newDoc.save();
-        pdfBytes = newPdfBytes.buffer;
+        // Create a new ArrayBuffer from the Uint8Array
+        const buffer = new ArrayBuffer(newPdfBytes.length);
+        const view = new Uint8Array(buffer);
+        view.set(newPdfBytes);
+        pdfBytes = buffer;
         
-        // Reload with PDF.js
-        const loadingTask = pdfjsLib.getDocument({ data: pdfBytes.slice(0) });
+        // Reload with PDF.js (pass a copy since PDF.js may transfer to worker)
+        const loadingTask = pdfjsLib.getDocument({ data: buffer.slice(0) });
         pdfDoc = await loadingTask.promise;
         
         // Reset order for new document
