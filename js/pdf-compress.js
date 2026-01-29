@@ -63,7 +63,11 @@ async function compressLight() {
         const compressedBytes = await pdfLibDoc.save({ useObjectStreams: true });
         
         const originalSize = pdfBytes.byteLength;
-        pdfBytes = compressedBytes.buffer;
+        // Create a new ArrayBuffer from the Uint8Array
+        const buffer = new ArrayBuffer(compressedBytes.length);
+        const view = new Uint8Array(buffer);
+        view.set(compressedBytes);
+        pdfBytes = buffer;
         const newSize = pdfBytes.byteLength;
         
         updateFileSize(newSize);
@@ -122,11 +126,15 @@ async function compressWithQuality(dpi, jpegQuality) {
         const compressedBytes = await newPdfDoc.save();
         
         const originalSize = pdfBytes.byteLength;
-        pdfBytes = compressedBytes.buffer;
+        // Create a new ArrayBuffer from the Uint8Array
+        const buffer = new ArrayBuffer(compressedBytes.length);
+        const view = new Uint8Array(buffer);
+        view.set(compressedBytes);
+        pdfBytes = buffer;
         const newSize = pdfBytes.byteLength;
         
-        // Reload with PDF.js
-        const loadingTask = pdfjsLib.getDocument({ data: pdfBytes.slice(0) });
+        // Reload with PDF.js (pass a copy since PDF.js may transfer to worker)
+        const loadingTask = pdfjsLib.getDocument({ data: buffer.slice(0) });
         pdfDoc = await loadingTask.promise;
         
         updateFileSize(newSize);

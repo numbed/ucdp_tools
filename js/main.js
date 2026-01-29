@@ -85,6 +85,7 @@ function init() {
         if (selectAllBtn) selectAllBtn.addEventListener('click', selectAllPages);
         if (deselectAllBtn) deselectAllBtn.addEventListener('click', deselectAllPages);
         if (deleteBtn) deleteBtn.addEventListener('click', deleteSelectedPages);
+        if (compressBtn) compressBtn.addEventListener('click', toggleCompressMenu);
         if (downloadBtn) downloadBtn.addEventListener('click', downloadPDF);
         if (closeBtn) closeBtn.addEventListener('click', closePDF);
         
